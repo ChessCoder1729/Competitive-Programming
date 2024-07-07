@@ -18,6 +18,9 @@
 		},
 		{
 			"path": "StressTesting"
+		},
+		{
+			"path": "CSES/Graph Algorithms"
 		}
 	],
 	"settings": {
