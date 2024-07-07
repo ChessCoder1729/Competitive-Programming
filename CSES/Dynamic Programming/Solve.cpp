@@ -26,8 +26,22 @@ void judge(){
  
 // to comment multiple lines at once ctrl+/
 // Find and replace Ctrl+H
+ll dp[1000001];
 
 int main(){
     fastio; judge();
-    
+    int n; int x; cin >> n >> x;
+    vector<int>coins(n);
+    for(int i = 0;i<n;i++) cin >> coins[i];
+    sort(coins.begin(),coins.end());
+    dp[0] = 1;
+    for(int j = 0;j<n;j++){
+        for(int i = 0;i<=x;i++){
+            if(i>=coins[j]){
+                dp[i] += dp[i-coins[j]];
+                dp[i] %= mod;
+            }
+        }
+    }
+    cout << dp[x];
 }
