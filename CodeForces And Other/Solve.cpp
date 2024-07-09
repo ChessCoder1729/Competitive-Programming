@@ -6,8 +6,9 @@ template <class T>
 using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define endl '\n';
 #define fastio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-#define py cout << "Yes" << endl;
-#define pn cout << "No" << endl;
+#define py cout << "YES" << endl;
+#define pn cout << "NO" << endl;
+#define pb push_back
 const long long inf = 1e18;
 const long long mod = 1e9+7;
 const int N = 2e5;
@@ -22,123 +23,91 @@ void judge(){
     freopen("2.txt","w",stdout);
     #endif
 }
-vector<ll>a(N);
-// 1 BASED INDEXING, build(1,1,n)
-struct node {
-    // MAKE CHANGES HERE
-    ll val = N;
-    // UNCHANGED
-    ll lzAdd;
-    ll lzSet;
-    node(){};
-};
-vector<node>t(4*N);
-
-node unite(node a, node b){
-    // MAKE CHANGES HERE
-    node ans; 
-    ans.val = a.val + b.val;
-    return ans;
-}
-
-#define lc (x<<1)
-#define rc (x<<1)+1
-
-inline void pushup(int x, int start, int end){
-    // MAKE CHANGES HERE
-    t[x].val = t[lc].val + t[rc].val;
-    return;
-}
-
-void pushdown(int x, int start, int end) {
-    int mid = (start+end)/2;
-    // lazy: range fixval
-    if (t[x].lzSet != 0) {
-      t[lc].lzSet = t[rc].lzSet = t[x].lzSet;
-      t[lc].val = (mid - start + 1) * t[x].lzSet;
-      t[rc].val = (end - mid) * t[x].lzSet;
-      t[lc].lzAdd = t[rc].lzAdd = 0;
-      t[x].lzSet = 0;
-    } 
-       else if (t[x].lzAdd != 0) {  // lazy: range add
-       if (t[lc].lzSet == 0) t[lc].lzAdd += t[x].lzAdd;
-       else {
-         t[lc].lzSet += t[x].lzAdd;
-         t[lc].lzAdd = 0;
-       }
-       if (t[rc].lzSet == 0) t[rc].lzAdd += t[x].lzAdd;
-       else {
-         t[rc].lzSet += t[x].lzAdd;
-         t[rc].lzAdd = 0;
-       }
-       t[lc].val += (mid - start + 1) * t[x].lzAdd;
-       t[rc].val += (end - mid) * t[x].lzAdd;
-       t[x].lzAdd = 0;
-    }
-    return;
-}
-
-void build(int x, int start, int end) {
-    t[x].lzAdd = t[x].lzSet = 0;
-    if (start == end) {
-       t[x].val = a[start];
-       return;
-    }
-    int mid = (start + end) >> 1;
-    build(lc, start, mid);
-    build(rc, mid + 1, end);
-    pushup(x,start,end);
-    return;
-}
-
-void add(int x, int start, int end, int l, int r, ll val) {
-    if (l > end || r < start) return;
-    if (l <= start && end <= r) {
-       t[x].val += (end - start + 1) * val;
-       if (t[x].lzSet == 0) t[x].lzAdd += val;
-       else t[x].lzSet += val;
-       return;
-    }
-    int mid = (start + end) >> 1;
-    pushdown(x, start, end);
-    add(lc, start, mid, l, r, val);
-    add(rc, mid + 1, end, l, r, val);
-    pushup(x,start,end);
-    return;
-}
-
-void fixval(int x, int start, int end, int l, int r, ll val) {
-    if (l > end || r < start) return;
-    if (l <= start && end <= r) {
-       t[x].val = (end - start + 1) * val;
-       t[x].lzAdd = 0;
-       t[x].lzSet = val;
-       return;
-    }
-    int mid = (start + end) >> 1;
-    pushdown(x, start, end);
-    fixval(lc, start, mid, l, r, val);
-    fixval(rc, mid + 1, end, l, r, val);
-    pushup(x,start,end);
-    return;
-}
-
-node query(int x, int start, int end, int l, int r) {
-    if (l > end || r < start){
-        // MAKE CHANGES HERE FOR BASED ON FUNCTION OF SEGMENT TREE
-        node tmp; tmp.val = 0;
-        return tmp;
-    }
-    if (l <= start && end <= r) return t[x];
-    int mid = (start + end) >> 1;
-    pushdown(x, start, end);
-    return unite(query(lc, start, mid, l, r),query(rc, mid + 1, end, l, r));
-}
  
 // to comment multiple lines at once ctrl+/
 // Find and replace Ctrl+H
 
+int req(int start, ll target, vector<ll>a){
+    ll curr = 0;
+    for(int i = start;i<a.size();i++){
+        if((curr+a[i])>=target){
+            return i;
+        }
+        curr += a[i];
+    }
+    return -1;
+}
+vector<int>solve(vector<ll>a, vector<ll>b, vector<ll>c,ll target){
+    int pos1 = req(0,target,a); int pos2 = req(pos1+1,target,b);
+    if(pos2!=-1){
+        int pos3 = req(pos2+1,target,c);
+        if(pos3!=-1){
+            return {pos1,pos2};
+        }
+    }
+    return {-1};
+}
+
 int main(){
     fastio; judge();
-    
+    int t; cin >> t;
+    while(t--){
+       int n; cin >> n;
+       vector<ll>a(n); vector<ll>b(n); vector<ll>c(n); ll tot = 0;
+        for(int i = 0;i<n;i++){
+            cin >> a[i]; tot += a[i];
+        }
+        for(int i = 0;i<n;i++) cin >> b[i];
+        for(int i = 0;i<n;i++) cin >> c[i];
+        ll target = tot/3 + min(tot%3,1LL);
+        vector<vector<int>>v;
+        v.push_back(solve(a,b,c,target));
+        v.push_back(solve(a,c,b,target));
+        v.push_back(solve(b,a,c,target));
+        v.push_back(solve(b,c,a,target));
+        v.push_back(solve(c,a,b,target));
+        v.push_back(solve(c,b,a,target));
+        bool ans = false;
+        for(int i = 0;i<6;i++){
+            vector<int>v1 = v[i];
+            if(v1.size()==2){
+                ans = true;
+                int pos1 = v1[0]; int pos2 = v1[1];
+                if(i==0){
+                    cout << 1 << ' ' << pos1+1 << ' ';
+                    cout << pos1 + 2 << ' ' << pos2 + 1 <<  ' ';
+                    cout << pos2 +2 << ' ' << n << endl; 
+                }
+                else if(i==1){
+                    cout << 1 << ' ' << pos1 + 1 << ' ';
+                    cout << pos2 + 2 << ' ' << n << ' ';
+                    cout << pos1 + 2 << ' ' << pos2+1 << endl; 
+                }
+                else if(i==2){
+                    cout << pos1 + 2 << ' ' << pos2+1 << ' ';
+                    cout << 1 << ' ' << pos1 + 1 << ' ';
+                    cout << pos2+2 << ' ' << n << endl;
+                }
+                else if(i==3){
+                    cout << pos2+2 << ' ' << n << ' ';
+                    cout << 1 << ' ' << pos1 + 1 << ' ';
+                    cout << pos1+2 << ' ' << pos2 +1 << endl;  
+                }
+                else if(i==4){
+                    cout << pos1 + 2 << ' ' << pos2 + 1 <<  ' ';
+                    cout << pos2 +2 << ' ' << n << ' ';
+                    cout << 1 << ' ' << pos1+1 << endl;
+                }
+                else{
+                    cout << pos2 +2 << ' ' << n << ' ';
+                    cout << pos1 + 2 << ' ' << pos2 + 1 <<  ' ';
+                    cout << 1 << ' ' << pos1+1 << endl;
+                }
+                break;
+            }
+        }
+        if(!ans){
+            cout << -1 << endl;
+        }
+    }
 }

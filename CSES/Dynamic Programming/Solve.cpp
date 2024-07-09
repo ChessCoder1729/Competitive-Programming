@@ -26,31 +26,31 @@ void judge(){
  
 // to comment multiple lines at once ctrl+/
 // Find and replace Ctrl+H
-vector<ll>cnt(1000001);
-set<int>digits(int n){
-    set<int>v;
-    while(n>0){
-        if(n%10!=0){
-            v.insert(n%10);
-        }
-        n = n/10;
-    }    
-    return v;
-}
+int dp[1000][100001]; vector<int>h(1000); vector<int>s(1000);
 
 int main(){
-    fastio; judge(); int n; cin >> n;
-    cnt[0] = 0;
-    for(int i = 1;i<=9;i++){
-        cnt[i] = 1;
-    }
-    for(int i = 10;i<=n;i++){
-        set<int>s = digits(i);
-        ll ans = inf;
-        for(auto x : s){
-            ans = min(ans,1+cnt[i-x]);
+    fastio; judge();
+    int n,x; cin >> n >> x;
+    for(int i = 0;i<n;i++) cin >> h[i];
+    for(int i = 0;i<n;i++) cin >> s[i];
+    for(int i = 0;i<=x;i++){
+        //dp[n-1][i]
+        if(h[n-1]>i){
+            dp[n-1][i] = 0;
         }
-        cnt[i] = ans;
+        else{
+            dp[n-1][i] = s[n-1];
+        }
     }
-    cout << cnt[n];
+    for(int i = n-2;i>=0;i--){
+        for(int j = 0;j<=x;j++){
+            if(h[i]>j){
+                dp[i][j]  = dp[i+1][j];
+            }
+            else{
+                dp[i][j] = max(dp[i+1][j],s[i]+dp[i+1][j-h[i]]);
+            }
+        }
+    }
+    cout << dp[0][x];
 }

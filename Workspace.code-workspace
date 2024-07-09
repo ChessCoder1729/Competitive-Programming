@@ -13,14 +13,16 @@
 			"path": "CSES/Range Queries"
 		},
 		{
+			"name": "Graph Algorithms",
+			"path": "CSES/Graph Algorithms"
+		},
+		{
 			"name": "CodeForces And Other",
 			"path": "CodeForces And Other"
 		},
 		{
+			"name": "StressTesting",
 			"path": "StressTesting"
-		},
-		{
-			"path": "CSES/Graph Algorithms"
 		}
 	],
 	"settings": {
