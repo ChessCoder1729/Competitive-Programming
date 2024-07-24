@@ -1,1 +1,0 @@
-{"name":"Local: Random","url":"d:\\CP\\Random.cpp","tests":[{"id":1713361384276,"input":"3 2\n1 1 5 5\n4 4 7 6\n3 3 8 7","output":"8"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CP\\Random.cpp","group":"local","local":true}
