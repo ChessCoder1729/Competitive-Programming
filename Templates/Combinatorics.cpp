@@ -21,14 +21,13 @@ struct combi{ // DONT FORGET TO PRECOMPUTE BEFORE START OF INT_MAIN()
     T modinverse(T n, T prime){// Only for 1 number
         return qexp(n,prime-2,prime);
     }
-    void precompute(T n) {
+    void precompute(T n, T prime) { // change depending on prime
         fact.assign(n + 1, 1); 
-        for (T i = 1; i <= n; i++) fact[i] = fact[i - 1] * i % mod;
+        for (T i = 1; i <= n; i++) fact[i] = fact[i - 1] * i % prime;
         invf.assign(n + 1, 1); 
-        invf[n] = qexp(fact[n], mod - 2, mod);
-        for (T i = n - 1; i > 0; i--) invf[i] = invf[i + 1] * (i + 1) % mod;
+        invf[n] = qexp(fact[n], prime - 2, prime);
+        for (T i = n - 1; i > 0; i--) invf[i] = invf[i + 1] * (i + 1) % prime;
     }
-
     T ncr(T n, T r) {
         if (r < 0 || r > n) return 0;
         return fact[n] * invf[r] % mod * invf[n - r] % mod;
