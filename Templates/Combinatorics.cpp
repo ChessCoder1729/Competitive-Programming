@@ -38,4 +38,14 @@ struct combi{ // DONT FORGET TO PRECOMPUTE BEFORE START OF INT_MAIN()
         if(r > n) return 0T;
         return fact[n] * invf[r] %mod;
     }
-};
+    pair<T, T> fib (T n) { // returns n^th and (n+1)^th fibonacci
+        if (n == 0) return {0, 1};
+        auto p = fib(n >> 1);
+        int c = p.first * (2 * p.second - p.first);
+        int d = p.first * p.first + p.second * p.second;
+        if (n & 1)
+            return {d, c + d};
+        else
+            return {c, d};
+    }
+};  
