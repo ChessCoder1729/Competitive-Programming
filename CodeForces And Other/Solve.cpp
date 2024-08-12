@@ -29,5 +29,29 @@ void judge(){
 
 int main(){
     fastio; judge();
-    
+    int t; cin >> t;
+    while(t--){
+        int n,x; cin >> n >> x;
+        set<int>s;
+        vector<int>a(n);
+        for(int i = 0;i<n;i++) cin >> a[i];
+        int cnt = 1;  s.insert(a[0]);
+        for(int i = 1;i<n;i++){
+            if(x%a[i]==0){
+                vector<int>v = {a[i]};
+                for(auto d : s){
+                    if((x/a[i])%d==0){
+                        v.pb(d*a[i]);
+                    }
+                }
+                for(auto x : v){
+                    s.insert(x);
+                }
+                if(s.count(x)>=1){
+                    cnt++; s.clear(); s.insert(a[i]);
+                }
+            }
+        }
+        cout << cnt << endl;
+    }
 }

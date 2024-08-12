@@ -8,6 +8,7 @@ using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statisti
 #define fastio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define py cout << "YES" << endl;
 #define pn cout << "NO" << endl;
+vector<int>primes = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
 #define pb push_back
 const long long inf = 1e18;
 const long long mod = 1e9+7;
@@ -26,31 +27,25 @@ void judge(){
  
 // to comment multiple lines at once ctrl+/
 // Find and replace Ctrl+H
-int dp[1000][100001]; vector<int>h(1000); vector<int>s(1000);
 
 int main(){
     fastio; judge();
-    int n,x; cin >> n >> x;
-    for(int i = 0;i<n;i++) cin >> h[i];
-    for(int i = 0;i<n;i++) cin >> s[i];
-    for(int i = 0;i<=x;i++){
-        //dp[n-1][i]
-        if(h[n-1]>i){
-            dp[n-1][i] = 0;
-        }
-        else{
-            dp[n-1][i] = s[n-1];
-        }
-    }
-    for(int i = n-2;i>=0;i--){
-        for(int j = 0;j<=x;j++){
-            if(h[i]>j){
-                dp[i][j]  = dp[i+1][j];
+    int tc = 1;
+    while(tc--){
+        int n; cin >> n;
+        vector<int>a(n);
+        for(int i =0;i<n;i++) cin >> a[i];
+        vector<int>dp;
+        for(int i = 0;i<n;i++){
+            auto it = lower_bound(dp.begin(),dp.end(),a[i]);
+            if(it==dp.end()){
+                dp.pb(a[i]);
             }
             else{
-                dp[i][j] = max(dp[i+1][j],s[i]+dp[i+1][j-h[i]]);
+                dp[(it-dp.begin())] = a[i];
             }
         }
+        cout << dp.size();
     }
-    cout << dp[0][x];
+    
 }

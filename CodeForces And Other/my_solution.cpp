@@ -24,46 +24,19 @@ void judge(){
     freopen("2.txt","w",stdout);
     #endif
 }
- 
+
+void cfsolver(){
+
+}
 // to comment multiple lines at once ctrl+/
 // Find and replace Ctrl+H
 
 int main(){
     fastio; judge();
-    int tc = 1;
-    while(tc--){
-        int n; cin >> n;
-        vector<int>a(n); vector<int>b(n);
-        for(int i = 0;i<n;i++) cin >> a[i];
-        for(int i = 0;i<n;i++) cin >> b[i];
-        int pos[n]; int dp[n];
-        for(int i = 0;i<n;i++){
-            pos[i] = INT_MAX;
-        }
-        dp[0] = (a[0]==b[0]); pos[b[0]] = 0;
-        for(int i = 1;i<n;i++){
-            if(a[i]==b[i]){
-                dp[i] = dp[i-1] + 1;
-            }
-            else{
-                if(pos[a[i]]<i){
-                    if(pos[a[i]]==0){
-                        dp[i] = max(dp[i-1],1);
-                    }
-                    else{
-                        dp[i] = max(dp[i-1],dp[pos[a[i]-1]]) + 1;
-                    }
-                }
-                else{
-                    dp[i] = dp[i-1];
-                }
-            }
-            pos[b[i]] = i;
-        }
-        // for(int i = 0;i<n;i++){
-        //     cout << dp[i] << ' ';
-        // }
-        cout << dp[n-1];
+    int tc = 1; cin >> tc;
+    for(int i = 1;i<=tc;i++){
+        //cout << "Testcase #" << i << endl;
+        cfsolver();
+        // cout << "------------------------------------------" << endl;
     }
-    
 }

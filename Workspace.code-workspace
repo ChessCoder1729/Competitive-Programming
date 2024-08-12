@@ -1,6 +1,18 @@
 {
 	"folders": [
 		{
+			"name": "CodeForces And Other",
+			"path": "CodeForces And Other"
+		},
+		{
+			"name": "Templates",
+			"path": "Templates"
+		},
+		{
+			"name": "USACO Silver",
+			"path": "USACO Silver"
+		},
+		{
 			"name": "Sorting And Searching",
 			"path": "CSES/Sorting And Searching"
 		},
@@ -15,14 +27,6 @@
 		{
 			"name": "Graph Algorithms",
 			"path": "CSES/Graph Algorithms"
-		},
-		{
-			"name": "CodeForces And Other",
-			"path": "CodeForces And Other"
-		},
-		{
-			"name": "StressTesting",
-			"path": "StressTesting"
 		}
 	],
 	"settings": {
@@ -45,7 +49,17 @@
 			"*.tcc": "cpp",
 			"map": "cpp",
 			"utility": "cpp",
-			"random": "cpp"
+			"random": "cpp",
+			"memory": "cpp",
+			"fstream": "cpp",
+			"future": "cpp",
+			"istream": "cpp",
+			"ostream": "cpp",
+			"shared_mutex": "cpp",
+			"sstream": "cpp",
+			"streambuf": "cpp",
+			"thread": "cpp",
+			"tuple": "cpp"
 		}
 	}
 }

@@ -32,8 +32,5 @@ int rand(int a, int b){  // Both inclusive
 int main(int argc, char* argv[]){
    srand(atoi(argv[1]));
    srand(time(NULL));
-    int n = 5; 
-    vector<int>v = permutation(6);
-    
 }
  
