@@ -18,6 +18,15 @@ struct numbertheory{ // while running just do basicnt<ll>
         if(yes) return {y,x};
         return {x,y};
     }
+    T qexp(T a, T b, T m) {
+        T res = 1;
+        while (b) {
+            if (b % 2) res = res * a % m;
+            a = a * a % m;
+            b /= 2;
+        }
+        return res;
+    }
     vector<T>divisors_till_n(int n){ 
     // Very good for problems related to divisors, including prime factorisation
         vector<T>max_div(n+1);
