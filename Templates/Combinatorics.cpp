@@ -13,7 +13,7 @@ struct combi{ // DONT FORGET TO PRECOMPUTE BEFORE START OF INT_MAIN()
         return res;
     }
     vector<T> fact, invf, inv;
-    void mod_inverse_tiT_n(T n, T prime){//For a range of numbers from 1-n
+    void mod_inverse_till_n(T n, T prime){//For a range of numbers from 1-n
         inv.assign(n+1,1);
         for (T i = 2; i <= n; i++) 
             inv[i] = inv[prime % i] * (prime - prime / i) % prime;      
