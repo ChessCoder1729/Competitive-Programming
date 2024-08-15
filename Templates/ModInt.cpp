@@ -15,3 +15,4 @@ void operator-=(mint &a, mint &b){a = a-b;}
 mint operator*(mint &a, mint &b){return to_mint(a.val*b.val);}
 void operator*=(mint &a, mint &b){a = a*b;}
 mint operator/(mint &a, mint &b){return to_mint((a.val/b.val));}
+
