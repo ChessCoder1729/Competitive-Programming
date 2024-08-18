@@ -32,7 +32,7 @@ struct combi{ // DONT FORGET TO PRECOMPUTE BEFORE START OF INT_MAIN()
     }
     ll ncr(ll n, ll r) {
         if (r < 0 || r > n) return 0;
-        return fact[n] * invf[r] % mod * invf[n - r] % mod;
+        return fact[n]%mod * invf[r] % mod * invf[n - r] % mod;
         //return fact[n] * qexp(fact[k], mod - 2, mod) % mod * qexp(fact[n - k], mod - 2, mod) % mod;
     }
     ll npr(ll n, ll r){ 
