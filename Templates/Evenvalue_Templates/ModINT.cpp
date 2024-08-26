@@ -1,4 +1,4 @@
-template<unsigned int M>
+template<unsigned int M> // to use mint a(4)
 struct modint {
   int64 x;
 
