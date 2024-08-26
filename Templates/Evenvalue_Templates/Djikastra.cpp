@@ -1,5 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
 typedef long long ll;
 ll kInf = 1e9 + 10;
 template<typename T>
