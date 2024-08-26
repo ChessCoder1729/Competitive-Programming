@@ -33,7 +33,7 @@ int main(){
     int tc = 1; cin >> tc;
     for(int testcase = 1;testcase<=tc;testcase++){
         // cout << "Testcase #" << i << endl;
-            
+        
         // cout << "------------------------------------------" << endl;
     }
 }
