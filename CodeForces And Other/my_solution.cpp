@@ -24,19 +24,16 @@ void judge(){
     freopen("2.txt","w",stdout);
     #endif
 }
-
-void cfsolver(){
-
-}
+ 
 // to comment multiple lines at once ctrl+/
 // Find and replace Ctrl+H
 
 int main(){
     fastio; judge();
     int tc = 1; cin >> tc;
-    for(int i = 1;i<=tc;i++){
-        //cout << "Testcase #" << i << endl;
-        cfsolver();
+    for(int testcase = 1;testcase<=tc;testcase++){
+        // cout << "Testcase #" << i << endl;
+            
         // cout << "------------------------------------------" << endl;
     }
 }
