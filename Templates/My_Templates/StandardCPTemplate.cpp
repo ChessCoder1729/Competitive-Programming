@@ -8,14 +8,14 @@ using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statisti
 #define fastio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define py cout << "YES" << endl;
 #define pn cout << "NO" << endl;
-vector<int>primes = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
 #define pb push_back
-const long long inf = 1e18;
-const long long mod = 1e9+7;
-const int N = 2e5;
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
+const ll inf = 1e18;
+const ll mod = 1e9+7;
+const int N = 2e5;
+vector<int>primes = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
 
 void judge(){
     srand(time(NULL));
@@ -24,19 +24,17 @@ void judge(){
     freopen("2.txt","w",stdout);
     #endif
 }
+ 
 
-void cfsolver(){
-
-}
 // to comment multiple lines at once ctrl+/
 // Find and replace Ctrl+H
 
 int main(){
     fastio; judge();
     int tc = 1; cin >> tc;
-    for(int i = 1;i<=tc;i++){
-        //cout << "Testcase #" << i << endl;
-        cfsolver();
+    for(int testcase = 1;testcase<=tc;testcase++){
+        // cout << "Testcase #" << i << endl;
+        
         // cout << "------------------------------------------" << endl;
     }
 }

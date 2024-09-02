@@ -24,7 +24,7 @@ struct DistAlgGraphs{
         return dist;    
     } 
     // If weights = 0,1
-    vector<ll> unweighted_djikstra(int src, vector<vector<pair<int,ll>>>&adj){
+    vector<ll>bfs_0_1(int src, vector<vector<pair<int,ll>>>&adj){
         vector<ll>dist(adj.size(),inf); parent.resize(adj.size());
         deque <int> q;
         dist[src] = 0;

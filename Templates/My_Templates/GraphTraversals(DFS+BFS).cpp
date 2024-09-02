@@ -21,11 +21,12 @@ struct Graph{
         queue<int>q; q.push(start);
         vis[start] = true;
         while(!q.empty()){
-            int node = q.front();
+            int node = q.front(); 
+            //cout << node << ' '; [Based on order of visiting node]
             q.pop();
             for(auto child:adj[node]){
                 if(!vis[child]){
-                    q.push(child);
+                    q.push(child); vis[child] = true;
                 }
             }
         }
