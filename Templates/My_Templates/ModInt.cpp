@@ -1,18 +1,28 @@
-#include <bits/stdc++.h>
-using namespace std;
-long long mod = 1e9 + 7;
-
-struct mint{long long val;};
-mint to_mint(long long x){
-    mint p; if(x>0){ p.val = x%mod; } else {p.val = mod - (-1*x)%mod;} return p;
-}
-ostream& operator<<(ostream&COUT, mint &a){COUT << a.val; return COUT;}
-istream& operator>>(istream&CIN, mint &a){CIN >> a.val; return CIN;}
-mint operator+(mint &a, mint &b) {return to_mint((a.val+b.val));}
-void operator+=(mint &a, mint&b) {a = a+b;}
-mint operator-(mint &a, mint&b){return to_mint(a.val*b.val);}
-void operator-=(mint &a, mint &b){a = a-b;}
-mint operator*(mint &a, mint &b){return to_mint(a.val*b.val);}
-void operator*=(mint &a, mint &b){a = a*b;}
-mint operator/(mint &a, mint &b){return to_mint((a.val/b.val));}
-
+struct mint {
+  ll value;
+  static const ll mod_value = mod;
+ 
+  mint(ll v = 0) { value = v % mod; if (value < 0) value += mod;}
+  mint(ll a, ll b) : value(0){ *this += a; *this /= b;}
+ 
+  mint& operator+=(mint const& b) {value += b.value; if (value >= mod) value -= mod; return *this;}
+  mint& operator-=(mint const& b) {value -= b.value; if (value < 0) value += mod;return *this;}
+  mint& operator*=(mint const& b) {value = (ll)value * b.value % mod;return *this;}
+ 
+  friend mint mexp(mint a, ll e) {
+    mint res = 1; while (e) { if (e&1) res *= a; a *= a; e >>= 1; }
+    return res;
+  }
+  friend mint inverse(mint a) { return mexp(a, mod - 2); }
+  friend mint frac(mint a, mint b) {return (a*inverse(b));}
+  mint& operator/=(mint const& b) { return *this *= inverse(b); }
+  friend mint operator+(mint a, mint const b) { return a += b; }
+  friend mint operator-(mint a, mint const b) { return a -= b; }
+  friend mint operator-(mint const a) { return 0 - a; }
+  friend mint operator*(mint a, mint const b) { return a *= b; }
+  friend mint operator/(mint a, mint const b) { return a /= b; }
+  friend std::istream& operator>>(std::istream &in, mint & a) {return in >> a.value;}
+  friend std::ostream& operator<<(std::ostream& os, mint const& a) {return os << a.value;}
+  friend bool operator==(mint const& a, mint const& b) {return a.value == b.value;}
+  friend bool operator!=(mint const& a, mint const& b) {return a.value != b.value;}
+};
