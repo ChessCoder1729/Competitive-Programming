@@ -31,4 +31,33 @@ struct Graph{
             }
         }
     }
+    void topological_dfs(int node, stack<int>&st){ 
+        vis[node] = true;
+        for(auto child : adj[node]){
+            if(!vis[child]) topological_dfs(child,st);
+        }
+        st.push(child);
+    }//for the topological sorting just output the stack 
+    vector<int> topologicalBFS(){
+        queue<int>q;
+        vector<int>topological_sort;
+        for(int i = 0;i<n;i++){
+            if(indeg[i]==0){
+                q.push(i);
+            }
+        }
+        while(!q.empty()){
+            int node = q.front();
+            q.pop();
+            topological_sort.pb(node);
+            for(auto child : adj[node]){
+                indeg[child]--;
+                if(indeg[child]==0){
+                    q.push(child);
+                }
+            }
+        }
+        // if(topological_sort.size()!=n) return false;
+        return topological_sort;
+    }
 };
