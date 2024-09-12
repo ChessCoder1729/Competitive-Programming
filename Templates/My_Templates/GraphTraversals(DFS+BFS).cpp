@@ -38,7 +38,7 @@ struct Graph{
         }
         st.push(child);
     }//for the topological sorting just output the stack 
-    vector<int> topologicalBFS(){
+    vector<int> topological_bfs(){
         queue<int>q;
         vector<int>topological_sort;
         for(int i = 0;i<n;i++){

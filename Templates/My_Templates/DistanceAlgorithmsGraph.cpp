@@ -15,7 +15,7 @@ struct DistAlgGraphs{
             for(auto child : adj[x.second]){
                 if(dist[child.first]>dist[x.second]+child.second){
                     s.erase({dist[child.first],child.first});
-                    parent[child.first] = child.second;
+                    //parent[child.first] = child.second;
                     dist[child.first] = dist[x.second] + child.second;
                     s.insert({dist[child.first],child.first});
                 }
@@ -23,7 +23,56 @@ struct DistAlgGraphs{
         }
         return dist;    
     } 
-    // If weights = 0,1
+    vector<ll> bellman_ford(int n, vector<vector<ll>>& edges, int src) {
+        vector<ll>dist(n,1e8);
+        dist[src] = 0;
+        for(int i = 0;i<n-1;i++){
+            for(auto e : edges){
+                int u = e[0]; int v = e[1]; ll w = e[2];
+                if(dist[u]!=1e8 and dist[v]>dist[u]+w){
+                    //parent[v] = u;
+                    dist[v] = dist[u]+w;
+                }
+            }
+        }
+        for(auto e :edges){
+            int u = e[0]; int v = e[1]; int w = e[2];
+            if(dist[u]!=1e8 and dist[v]>dist[u]+w){
+                return {-1}; // Negative cycle
+            }
+        }
+        return dist;
+    }
+
+    vector<vector<ll>>flyod_warshal(int n, vector<vector<ll>>&edges){
+        vector<vector<ll>>matrix(n);
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<n;j++){
+                matrix[i].push_back(inf);
+            }
+            matrix[i][i] = 0;
+        }
+        for(auto e : edges){
+            int u = e[0]; int v = e[1]; ll w = e[2];
+            matrix[u][v] = min(matrix[u][v],w);
+        }
+        for (int k = 0; k < n; k++) {
+            for (int start = 0; start<n; start++) {
+                for (int end = 0; end < n; end++) {
+                    if (matrix[start][k] < inf && matrix[k][end] < inf)
+                        matrix[start][end] = min(matrix[start][end], matrix[start][k] + matrix[k][end]); 
+                }
+            }
+        }
+
+        for(int i = 0;i<n;i++){
+            if(matrix[i][i]<0){
+                return {{-1}}; // not possible that is negative cycle
+            }
+        }
+        return matrix;
+    }
+    // If weights = 0,1 [If weights = 1 then just bfs]
     vector<ll>bfs_0_1(int src, vector<vector<pair<int,ll>>>&adj){
         vector<ll>dist(adj.size(),inf); parent.resize(adj.size());
         deque <int> q;

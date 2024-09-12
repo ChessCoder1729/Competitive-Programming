@@ -1,8 +1,9 @@
 Some common ways for solving a Graph Problem
 
-1. Topological Sort
+1. Topological Sort (Problems generally say "no directed cycles")
 a. This gives an ordering such that node u comes before node v if node u is connected to node v
 b. It is useful for questions involving DAG[Directed Acyclic Graph]
+c. If you want a DFS to start at node u just do DFS Method starting with node u
 
 2. UFDS(or DSU)
 a. This gives a structure for giving nodes that are connected to each other
