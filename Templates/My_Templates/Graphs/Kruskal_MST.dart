@@ -1,5 +1,7 @@
 // For finding the Minimum Spanning Tree
 
+// Time Complexity : O(E log V)
+
 struct ufds{
     vector<ll>par; 
     vector<ll>sz; 

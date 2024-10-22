@@ -8,14 +8,25 @@ using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statisti
 #define fastio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define py cout << "YES" << endl;
 #define pn cout << "NO" << endl;
-vector<int>primes = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
 #define pb push_back
-const long long inf = 1e18;
-const long long mod = 1e9+7;
-const int N = 2e5;
+#define int long long
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
+const ll inf = 1e18;
+const ll mod = 1e9+7;
+const int N = 2e5;
+vector<int>primes = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+
+// Check for queue, priorioty_queue, stack, ordered_set solutions
+// stack => LIFO (whatever goes in last comes out last)
+// queue => FIFO (whatever goes in first comes out first)
+// priority_queue => Dynamic queries of minimum/maximum
+// ordered_set => set in vector form
+//[order_of_key(k) gives number of elements less than k, while find_by_order(i) gives i^th element]
+
+// To comment multiple lines : ctrl + /
+// To find and replace : ctrl+H
 
 void judge(){
     srand(time(NULL));
@@ -24,19 +35,33 @@ void judge(){
     freopen("2.txt","w",stdout);
     #endif
 }
-
+ 
 void cfsolver(){
+    int n; cin >> n;
+    vector<int>a(n);
+    for(int i = 0;i<n;i++) cin >> a[i];
 
+    vector<int>cnt(n,0); int ans = 0;
+    cnt[0] = a[0];
+    for(int i = 1;i<n;i++){
+        cnt[i] = cnt[i-1] + a[i];
+    }
+
+    for(int i = 0;i<n;i++){
+        for(int j = i;j<n;j++){
+            if(cnt[j])
+        }
+    }
 }
-// to comment multiple lines at once ctrl+/
-// Find and replace Ctrl+H
 
-int main(){
+signed main(){
     fastio; judge();
     int tc = 1; cin >> tc;
-    for(int i = 1;i<=tc;i++){
-        //cout << "Testcase #" << i << endl;
+    for(int testcase = 1;testcase<=tc;testcase++){
+        //cout << "Case #" << testcase << ": ";
         cfsolver();
+        
+        
         // cout << "------------------------------------------" << endl;
     }
 }

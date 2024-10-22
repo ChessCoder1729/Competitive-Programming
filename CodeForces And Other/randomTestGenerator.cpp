@@ -32,8 +32,10 @@ int rand(int a, int b){  // Both inclusive
 int main(int argc, char* argv[]){
    srand(atoi(argv[1]));
    srand(time(NULL));
-    int n = 5; 
-    vector<int>v = permutation(6);
-    
+   cout << 1 << endl;
+   int n = rand(1,10);
+    for(int i = 0;i<n;i++){
+        cout << rand(0,1) << ' ';
+    }
 }
  

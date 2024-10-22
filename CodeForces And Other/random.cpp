@@ -8,14 +8,25 @@ using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statisti
 #define fastio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define py cout << "YES" << endl;
 #define pn cout << "NO" << endl;
-vector<int>primes = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
 #define pb push_back
-const long long inf = 1e18;
-const long long mod = 1e9+7;
-const int N = 2e5;
+#define int long long
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double lld;
+const ll inf = 1e18;
+const ll mod = 1e9+7;
+const int N = 2e5;
+vector<int>primes = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+
+// Check for queue, priorioty_queue, stack, ordered_set solutions
+// stack => LIFO (whatever goes in last comes out last)
+// queue => FIFO (whatever goes in first comes out first)
+// priority_queue => Dynamic queries of minimum/maximum
+// ordered_set => set in vector form
+//[order_of_key(k) gives number of elements less than k, while find_by_order(i) gives i^th element]
+
+// To comment multiple lines : ctrl + /
+// To find and replace : ctrl+H
 
 void judge(){
     srand(time(NULL));
@@ -24,96 +35,42 @@ void judge(){
     freopen("2.txt","w",stdout);
     #endif
 }
-template <typename T>
-struct basicnt{ // while running just do basicnt<ll>
-    T gcd(T a, T b){
-        if(a<b) swap(a,b);
-        return b == 0 ? a : gcd(b, a % b);
-    }
-    T lcm(T a, T b){
-        return a/gcd(a,b)*b;
-    }
-    pair<T,T> euclid_gcd(T a, T b) { // ax + by = gcd(a,b)
-        bool yes = false;
-        if(a<b){ swap(a,b); yes = true;}
-        T x,y;
-        if (b == 0) {x = 1, y = 0; return {x,y};}
-        pair<T,T>p = euclid_gcd(b,a%b); T x1 = p.first; T y1 = p.second;
-        x = y1;
-        y = x1 - y1 * (a / b);
-        if(yes) return {y,x};
-        return {x,y};
-    }
-    vector<T>divisors_till_n(int n){ 
-    // Very good for problems related to divisors, including prime factorisation
-        vector<T>max_div(n+1);
-        for (T i = 2; i <= n; i++) {
-		    if (max_div[i] == 0) { // i is a prime
-		    	for (T j = i; j <= n; j += i) { max_div[j] = i; }
-		    }
-	    }
-        return max_div;
-    }
-    vector<int> phi_0_to_n(int n) {// Number of numbers copirme to n
-        vector<int> phi(n + 1);
-        for (int i = 0; i <= n; i++)
-            phi[i] = i;
 
-        for (int i = 2; i <= n; i++) {
-            if (phi[i] == i) {
-                for (int j = i; j <= n; j += i)
-                    phi[j] -= phi[j] / i;
-            }
-        }
-        return phi;
-    }
-    vector<T> segmentedSieve(T L, T R) {// Inclusive of both L and R
-        // generate all primes up to sqrt(R)
-        T lim = sqrt(R);
-        vector<char> mark(lim + 1, false);
-        vector<T> primes;
-        for (T i = 2; i <= lim; ++i) {
-            if (!mark[i]) {
-                primes.emplace_back(i);
-                for (T j = i * i; j <= lim; j += i)
-                    mark[j] = true;
-            }
-        }
-        vector<char> isPrime(R - L + 1, true);
-        for (T i : primes)
-            for (T j = max(i * i, (L + i - 1) / i * i); j <= R; j += i)
-                isPrime[j - L] = false;
-        if (L == 1)
-            isPrime[0] = false;
-        vector<T>prime;
-        for(T i = 0; i<=R-L;i++){
-            if(isPrime[i]){
-                prime.pb(L+i);
-            }
-        }
-        return prime;
-    }
-}; 
+int maxD, maxNode;
 
-// to comment multiple lines at once ctrl+/
-// Find and replace Ctrl+H
+void dfs( vector<vector<int>>&adj, vector<bool>&vis, int node , int d ){
+    vis[node] = 1 ;
+    if( d > maxD ){
+        maxNode = node ;
+        maxD = d ;
+    }
 
-int main(){
+     // applying the standard dfs 
+    for( auto x : adj[node] ){
+        if(vis[x] == 0 ){
+            dfs(adj,vis, x,d+1 ) ;
+        }
+    }
+}
+
+void cfsolver(){
+    maxD = -1, maxNode = -1; 
+    int n; cin >> n; vector<vector<int>>adj(n); vector<bool>vis(n,false);
+    for(int i = 0,u,v;i<n;i++){
+        cin >> u >> v; adj[u-1].pb(v-1); adj[v-1].pb(u-1);
+    }
+
+    
+}
+
+signed main(){
     fastio; judge();
-    basicnt<int> p;  vector<int>v = p.phi_0_to_n(1e6);
-    vector<int>psum(1e6); psum[0] = 0; psum[1] = 0;
-    for(int i = 2;i<v.size();i++){
-        psum[i] = psum[i-1] + v[i];
+    int tc = 1; cin >> tc;
+    for(int testcase = 1;testcase<=tc;testcase++){
+        //cout << "Case #" << testcase << ": ";
+        cfsolver();
+        
+        
+        // cout << "------------------------------------------" << endl;
     }
-    int n;
-    while(cin >> n){
-        if(n==0){
-            break;
-        }
-        ull ans = 0;
-        for(int i = 1;i<=n/2;i++){
-            ans += i*psum[n/i]*1ULL;
-        }
-        cout << ans << endl;
-    }  
 }

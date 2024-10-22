@@ -9,24 +9,18 @@
 			"path": "Templates"
 		},
 		{
+			"name": "CSES",
+			"path": "CSES"
+		},
+		{
 			"name": "USACO Silver",
 			"path": "USACO Silver"
 		},
 		{
-			"name": "Sorting And Searching",
-			"path": "CSES/Sorting And Searching"
+			"path": "Tips For Solving"
 		},
 		{
-			"name": "Dynamic Programming",
-			"path": "CSES/Dynamic Programming"
-		},
-		{
-			"name": "Range Queries",
-			"path": "CSES/Range Queries"
-		},
-		{
-			"name": "Graph Algorithms",
-			"path": "CSES/Graph Algorithms"
+			"path": "Python"
 		}
 	],
 	"settings": {
@@ -59,7 +53,12 @@
 			"sstream": "cpp",
 			"streambuf": "cpp",
 			"thread": "cpp",
-			"tuple": "cpp"
+			"tuple": "cpp",
+			"optional": "cpp",
+			"string_view": "cpp",
+			"ratio": "cpp",
+			"system_error": "cpp",
+			"type_traits": "cpp"
 		}
 	}
 }
