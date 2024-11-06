@@ -1,5 +1,5 @@
-struct node{
-    long long sum;
+struct node{ // Make changes here
+    int sum;
 };
 
 class SegTree{
@@ -8,16 +8,17 @@ class SegTree{
     
     int n; vector<node>t; vector<int>a;
 
-    node unite(node a, node b){
+    node unite(node a, node b){ // Make changes here    
         node ans;
         ans.sum = a.sum + b.sum;
         return ans;
     }
 
     private:
-        void build(int x, int start, int end){
+        void build(int x, int start, int end){ // Make changes here
             if(start==end){
-                t[x].sum = a[start]; return;
+                t[x].sum = a[start];
+                return;
             }
             int mid = (start+end)/2;
             build(lc,start,mid);
@@ -37,6 +38,19 @@ class SegTree{
             else{
                 update(rc,mid+1,end,idx,val);
             }
+            t[x] = unite(t[lc],t[rc]); return;
+        }
+
+        void update_range(int x, int start, int end, int l, int r){
+            if(start>r or end<l) return;
+            if(start==end){
+                //a[start] = 
+                return;
+            }
+            int mid = (start+end)/2; 
+            // Insert some if condition
+            update_range(lc,start,mid,l,r);
+            update_range(rc,mid+1,end,l,r);
             t[x] = unite(t[lc],t[rc]); return;
         }
 
@@ -68,7 +82,11 @@ class SegTree{
             return query(0, 0, n - 1, l, r);
         }
 
-        void update(int pos, int val){
+        void update_range(int l, int r){ // Make changes here
+            update_range(0, 0, n - 1, l, r);
+        }
+
+        void update(int pos, int val){ // Make changes here
             update(0, 0, n - 1, pos, val);
         }
 };
