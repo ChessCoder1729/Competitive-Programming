@@ -1,15 +1,18 @@
 Stacks (DATA STRUCTURES)
 Queues (DATA STRUCTURES)
-Binary Search (ALGORITHM)
-Hashing (ALGORITHM)
+Binary Search (ALGORITHM) (Done)
+Hashing (ALGORITHM) (Done) 
 Tries (DATA STRUCTUREish)
 Trees(Including Generic Trees)
-Graphs
-DSU
-Segment Trees (RANGE QUERIES)
-Sparse Tables (RANGE QUERIES)
-Expected Value
-Probability
-Number Theory
-Combinatorics
+Graphs (Done kindof)
+DSU (Done)
+Segment Trees (RANGE QUERIES) (Done kindof)
+Sparse Tables (RANGE QUERIES) (Not required)
+Expected Value (Done kindof)
+Probability 
+Number Theory (Done kindof)
+Combinatorics (Done kindof)
 Convex Hull Trick
+Binary Lifting
+Square Root Decompostion- Mo's algo
+Bitmask DP
