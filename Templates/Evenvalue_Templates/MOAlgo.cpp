@@ -37,7 +37,7 @@ public:
       //todo
     };
 
-    auto rem = [&](const int i) {
+    auto rem = [&](const int i) { 
       //todo
     };
 
