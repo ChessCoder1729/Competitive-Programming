@@ -42,16 +42,18 @@ class SegTree{
         }
 
         void update_range(int x, int start, int end, int l, int r){
+            // if the number of times we update each number is constant
             if(start>r or end<l) return;
             if(start==end){
                 //a[start] = 
                 return;
             }
             int mid = (start+end)/2; 
-            // Insert some if condition
+            // Insert some if condition, s.t. if operation performed, then no change
             update_range(lc,start,mid,l,r);
             update_range(rc,mid+1,end,l,r);
             t[x] = unite(t[lc],t[rc]); return;
+            // Refer to https://codeforces.com/contest/1797/submission/290285800
         }
 
         node query(int x, int start, int end, int l, int r){
