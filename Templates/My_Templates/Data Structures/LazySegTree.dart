@@ -53,12 +53,8 @@ private:
         tree[x].sum += (end - start + 1) * lazy[x].add_val;
 
         if (start != end) { 
-            if (!lazy[lc].is_set) {
-                lazy[lc].add_val += lazy[x].add_val;
-            }
-            if (!lazy[rc].is_set) {
-                lazy[rc].add_val += lazy[x].add_val;
-            }
+            lazy[lc].add_val += lazy[x].add_val;
+            lazy[rc].add_val += lazy[x].add_val;
         }
 
         lazy[x].add_val = 0; 
