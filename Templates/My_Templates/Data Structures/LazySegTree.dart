@@ -49,21 +49,19 @@ private:
             }
  
             lazy[x].is_set = false;  
-        }
-        if (lazy[x].add_val != 0) {  
-            tree[x].sum += (end - start + 1) * lazy[x].add_val;
- 
-            if (start != end) { 
-                if (!lazy[lc].is_set) {
-                    lazy[lc].add_val += lazy[x].add_val;
-                }
-                if (!lazy[rc].is_set) {
-                    lazy[rc].add_val += lazy[x].add_val;
-                }
+        } 
+        tree[x].sum += (end - start + 1) * lazy[x].add_val;
+
+        if (start != end) { 
+            if (!lazy[lc].is_set) {
+                lazy[lc].add_val += lazy[x].add_val;
             }
- 
-            lazy[x].add_val = 0;  
+            if (!lazy[rc].is_set) {
+                lazy[rc].add_val += lazy[x].add_val;
+            }
         }
+
+        lazy[x].add_val = 0; 
     }
  
     void update(int x, int start, int end, int l, int r, int add_value) {
