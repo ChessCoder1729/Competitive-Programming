@@ -1,3 +1,13 @@
+struct Query { // to create vector just do vector<Mos::Query>q
+    int l, r, idx;  
+    
+    bool operator<(const Query& q) const {
+        int block_size = sqrt(2e5); // Set block size to sqrt(2e5)
+        if (l / block_size != q.l / block_size)
+            return l / block_size < q.l / block_size;
+        return r < q.r;
+    }
+};
 class Mos {
 private:
     vector<int> a;
@@ -15,22 +25,12 @@ private:
     }
 
 public:
-    struct Query { // to create vector just do vector<Mos::Query>q
-        int l, r, idx;  
-        
-        bool operator<(const Query& q) const {
-            int block_size = sqrt(2e5); // Set block size to sqrt(2e5)
-            if (l / block_size != q.l / block_size)
-                return l / block_size < q.l / block_size;
-            return r < q.r;
-        }
-    };
 
     // Constructor to initialize the array and precompute the block size
     Mos(const vector<int>& a) : a(a), n(a.size()) {
         block_size = (int)sqrt(2e5);  // Set block size to sqrt(2e5)
     }
-
+    
     // Function to answer range queries without sorting
     vector<int> processQueries(vector<Query>& queries) {
         vector<int> result(queries.size());

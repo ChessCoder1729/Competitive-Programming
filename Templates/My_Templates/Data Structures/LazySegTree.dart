@@ -88,7 +88,6 @@ private:
         }
  
         if (l <= start && end <=r) {
- 
             lazy[x].is_set = true;
             lazy[x].set_val = set_value;
             lazy[x].add_val = 0;  
