@@ -1,7 +1,7 @@
 struct ufds{
     vector<ll>par; 
     vector<ll>sz; 
-    void build(ll n){
+    ufds(ll n){
         par.resize(n); 
         sz.resize(n);
         for(ll i = 0;i<n;i++){

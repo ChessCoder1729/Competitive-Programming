@@ -1,5 +1,8 @@
 struct node{ // Make changes here
     int sum;
+    node(int x = 0){
+        sum = x;
+    }
 };
 
 class SegTree{
@@ -9,15 +12,13 @@ class SegTree{
     int n; vector<node>t; vector<int>a;
 
     node unite(node a, node b){ // Make changes here    
-        node ans;
-        ans.sum = a.sum + b.sum;
-        return ans;
+        return node(a.sum+b.sum);
     }
 
     private:
         void build(int x, int start, int end){ // Make changes here
             if(start==end){
-                t[x].sum = a[start];
+                t[x] = node(a[start]);
                 return;
             }
             int mid = (start+end)/2;
@@ -29,7 +30,7 @@ class SegTree{
 
         void update(int x, int start, int end, int idx, int val){
             if(start==end){
-                t[x].sum = val; return;
+                t[x] = node(val); return;
             }
             int mid = (start+end)/2; 
             if(idx<=mid){
