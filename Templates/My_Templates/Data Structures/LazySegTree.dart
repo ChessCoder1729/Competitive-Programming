@@ -1,16 +1,19 @@
 struct node {
-    long long sum;  // The sum of the range (used for sum queries)
+    int sum;  // The sum of the range (used for sum queries)
+    node(int x = 0){
+        sum = x;
+    }
 };
  
 struct lazyNode {
     bool is_set = false;  // Flag for set operation
-    long long set_val = LLONG_MAX;  // Value for the set operation
-    long long add_val = 0;  // Value for the add operation
+    int set_val = inf;  // Value for the set operation
+    int add_val = 0;  // Value for the add operation
 };
  
 class LazySegmentTree {
 private:
-    vector<node> tree;
+    vector<node> t;
     vector<lazyNode> lazy;
     int n;
     vector<int>a;
@@ -20,26 +23,23 @@ private:
     #define rc 2*(mid-start+1)+x 
  
     node unite(node a, node b) {
-        node ans;
-        ans.sum = a.sum + b.sum;
-        return ans;
+        return node(a.sum+b.sum);
     }
  
     void build(int x, int start, int end) {
         if (start == end) {
-            tree[x].sum = a[start];  
+            t[x]= node(a[start]); 
+            return; 
         } 
-        else{
-            build(lc, start, mid);  
-            build(rc, mid + 1, end); 
-            tree[x] = unite(tree[lc], tree[rc]);  
-        }
+        build(lc, start, mid);  
+        build(rc, mid + 1, end); 
+        t[x] = unite(t[lc], t[rc]);  
     }
  
     void push(int x, int start, int end) {
         if (lazy[x].is_set) {  
  
-            tree[x].sum = (end - start + 1) * lazy[x].set_val;
+            t[x].sum = (end - start + 1) * lazy[x].set_val;
  
             if (start != end) {  
                 lazy[lc].is_set = true;
@@ -50,7 +50,7 @@ private:
  
             lazy[x].is_set = false;  
         } 
-        tree[x].sum += (end - start + 1) * lazy[x].add_val;
+        t[x].sum += (end - start + 1) * lazy[x].add_val;
 
         if (start != end) { 
             lazy[lc].add_val += lazy[x].add_val;
@@ -63,10 +63,6 @@ private:
     void update(int x, int start, int end, int l, int r, int add_value) {
         push(x, start, end); 
  
-        if (l > r) {
-            return;  
-        }
- 
         if (l <= start && end <= r) {
             if (add_value != 0) { 
                 lazy[x].add_val += add_value;
@@ -74,18 +70,24 @@ private:
             push(x, start, end);  
             return;
         }
- 
-        update(lc, start, mid, l, min(r, mid), add_value);  
-        update(rc, mid + 1, end, max(l, mid + 1), r, add_value);  
-        tree[x] = unite(tree[lc], tree[rc]);  // Update current node using unite
+        if(r<=mid){
+            push(rc,mid+1,end);
+            update(lc,start,mid,l,r,add_value);
+        }
+        else if(mid<l){
+            push(lc,start,mid);
+            update(rc,mid+1,end,l,r,add_value);
+        }
+        else{
+            update(lc,start,mid,l,mid,add_value);
+            update(rc,mid+1,end,mid+1,r,add_value);
+        }
+        
+        t[x] = unite(t[lc], t[rc]);  // Update current node using unite
     }
  
     void set(int x, int start, int end, int l, int r, int set_value) {
         push(x, start, end); 
- 
-        if (l > r) {
-            return;  
-        }
  
         if (l <= start && end <=r) {
             lazy[x].is_set = true;
@@ -94,45 +96,54 @@ private:
             push(x, start, end);  
             return;
         }
- 
-        set(lc, start, mid, l, min(r, mid), set_value);  
-        set(rc, mid + 1, end, max(l, mid + 1), r, set_value);  
-        tree[x] = unite(tree[lc], tree[rc]); 
+
+        if(r<=mid){
+            push(rc,mid+1,end);
+            set(lc,start,mid,l,r,set_value);
+        }
+        else if(mid<l){
+            push(lc,start,mid);
+            set(rc,mid+1,end,l,r,set_value);
+        }
+        else{
+            set(lc,start,mid,l,mid,set_value);
+            set(rc,mid+1,end,mid+1,r,set_value);
+        }
+        t[x] = unite(t[lc], t[rc]); 
     } 
  
     node query(int x, int start, int end, int l, int r) {
         push(x, start, end);  
  
-        if (l > r) {
-            node result = {0};  
-            return result;
-        }
- 
         if (l <= start && end<=r) {
-            return tree[x];  
+            return t[x];  
         }
- 
-        node left_result = query(lc, start, mid, l, min(r, mid));  
-        node right_result = query(rc, mid + 1, end, max(l, mid + 1), r);  
-        
-        return unite(left_result, right_result); 
+        if(r<=mid){
+            return query(lc,start,mid,l,r);
+        }
+        else if(mid<l){
+            return query(rc,mid+1,end,l,r);
+        }
+        else{
+            return unite(query(lc,start,mid,l,r),query(rc,mid+1,end,l,r));
+        }
     }
  
  
 public:
-    LazySegmentTree(vector<long long>&tmp) {
+    LazySegmentTree(vector<int>&tmp) {
         n = tmp.size();
         a = tmp;
-        tree.resize(2 * n);
+        t.resize(2 * n);
         lazy.resize(2 * n);
-        build(0, 0, n - 1);  // Build the tree using the input array
+        build(0, 0, n - 1);  // Build the t using the input array
     }
  
     void update(int l, int r, int add_value) {
         update(0, 0, n - 1, l, r, add_value);
     }
  
-    void set(int l, int r, long long set_value) {
+    void set(int l, int r, int set_value) {
         set(0, 0, n - 1, l, r, set_value);
     }
  
