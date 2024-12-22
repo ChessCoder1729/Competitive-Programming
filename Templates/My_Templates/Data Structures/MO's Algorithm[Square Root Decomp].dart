@@ -15,12 +15,18 @@ private:
     int block_size;
 
     // Function to add an element to the current range
-    void add(int idx, vector<int>& op, int& current_answer) {
+    void add_right(int idx, vector<int>& op, int& current_answer) {
+        op[a[idx]]++;
+    }
+    void add_left(int idx, vector<int>& op, int& current_answer){
         op[a[idx]]++;
     }
 
     // Function to remove an element from the current range
-    void remove(int idx, vector<int>& op, int& current_answer) {
+    void remove_right(int idx, vector<int>& op, int& current_answer) {
+        op[a[idx]]--;
+    }
+    void remove_left(int idx, vector<int>& op, int& current_answer){
         op[a[idx]]--;
     }
 
@@ -36,19 +42,19 @@ public:
         vector<int> result(queries.size());
         sort(queries.begin(),queries.end());
         
-        vector<int> op(n + 1, 0); // The operation on the element
+        vector<int>op(n+1,0); // The operation on the element
 
         int left = 0, right = -1, current_answer = 0;
 
         // Process each query without sorting
         for (const auto& query : queries) {
             // Move the right pointer to the query's right boundary
-            while (right < query.r) { add(++right, op, current_answer); }
-            while (right > query.r) { remove(right--, op, current_answer); }
+            while (right < query.r) { add_right(++right, op, current_answer); }
+            while (right > query.r) { remove_right(right--, op, current_answer); }
 
             // Move the left pointer to the query's left boundary
-            while (left < query.l) { remove(left++, op, current_answer); }
-            while (left > query.l) { add(--left, op, current_answer); }
+            while (left < query.l) { remove_left(left++, op, current_answer); }
+            while (left > query.l) { add_left(--left, op, current_answer); }
 
             // Store the result for the current query
             result[query.idx] = current_answer;
