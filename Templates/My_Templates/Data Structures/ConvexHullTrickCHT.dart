@@ -1,13 +1,14 @@
 struct line {
 	mutable int m, c, p;
-	bool operator<(const line& o) const { return m < o.m; }
+	bool operator<(const line& l) const { return m < l.m; }
 	bool operator<(int x) const { return p < x; }
 };
 // Returns max for a convex hull
 struct LineContainer : multiset<line, less<>> {
 	// (for doubles, use inf = 1/.0, ceil(a,b) = a/b)
 	int ceil(int a, int b) { // floored division
-		return a / b + min(a%b,1LL); }
+		return a / b - ((a ^ b) < 0 && a % b); 
+	}
 	
     bool isect(iterator x, iterator y) {
 		if (y == end()){
@@ -15,11 +16,9 @@ struct LineContainer : multiset<line, less<>> {
             return false;
         }
 		if (x->m==y->m){
+			x->p = -1*inf;
             if (x->c > y->c) {
                 x->p = inf;
-            } 
-            else {
-                x->p = -inf;
             }
         }
 		else{
