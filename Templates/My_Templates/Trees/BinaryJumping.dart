@@ -1,6 +1,5 @@
 struct bin_node{
     int vertex;
-    int dist = 0;
     // The other stuff like max
 
     bool operator==(const bin_node &b){
@@ -11,7 +10,6 @@ struct bin_node{
 bin_node unite(bin_node a, bin_node b){ // Order is very imp
     bin_node ans;
     ans.vertex = b.vertex;
-    ans.dist = a.dist + b.dist;
     return ans;
 }
 
@@ -30,7 +28,6 @@ class BinaryJump{
             }
             for(int i = 1;i<n;i++){
                 up[i][0].vertex = par[i];
-                up[i][0].dist = 1;
             }
             // Jumps 
             for(int j = 1;j<mx;j++){
@@ -81,8 +78,8 @@ class BinaryJump{
             }
             bin_node x,y;
             // Bring to same depth
-            x = kthAncestor(a,0);
-            y = kthAncestor(b,depth[b]-depth[a]);
+            x = kth(a,0);
+            y = kth(b,depth[b]-depth[a]);
             bin_node ans = x;
             ans = unite(ans,y);
             if(x==y){
@@ -90,8 +87,8 @@ class BinaryJump{
             }
             // Loop over the i
             for(int i = log2(n)+1;i>=0;i--){
-                auto p = kthAncestor(x.vertex,(1<<i));
-                auto q = kthAncestor(y.vertex,(1<<i));
+                auto p = kth(x.vertex,(1<<i));
+                auto q = kth(y.vertex,(1<<i));
                 if(p==q){
                     continue;
                 }
@@ -101,8 +98,8 @@ class BinaryJump{
                     x = p; y = q;
                 }
             }
-            ans = unite(ans,kthAncestor(x.vertex,1));
-            ans = unite(ans,kthAncestor(y.vertex,1));
+            ans = unite(ans,kth(x.vertex,1));
+            ans = unite(ans,kth(y.vertex,1));
             return ans;
         }
 

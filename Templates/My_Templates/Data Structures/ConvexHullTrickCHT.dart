@@ -6,7 +6,7 @@ struct line {
 // Returns max for a convex hull
 struct LineContainer : multiset<line, less<>> {
 	// (for doubles, use inf = 1/.0, ceil(a,b) = a/b)
-	int ceil(int a, int b) { // floored division
+	int div(int a, int b) { // floored division
 		return a / b - ((a ^ b) < 0 && a % b); 
 	}
 	
@@ -22,7 +22,7 @@ struct LineContainer : multiset<line, less<>> {
             }
         }
 		else{
-            x->p = ceil(y->c - x->c, x->m - y->m);
+            x->p = div(y->c - x->c, x->m - y->m);
         }
 		return x->p >= y->p;
 	}

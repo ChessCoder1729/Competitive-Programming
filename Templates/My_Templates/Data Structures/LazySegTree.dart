@@ -10,7 +10,11 @@ struct lazyNode {
     int set_val = inf;  // Value for the set operation
     int add_val = 0;  // Value for the add operation
 };
- 
+
+node unite(node a, node b) {
+    return node(a.sum+b.sum);
+} 
+
 class LazySegmentTree {
 private:
     vector<node> t;
@@ -21,10 +25,7 @@ private:
     #define mid (start+end)/2
     #define lc x + 1 
     #define rc 2*(mid-start+1)+x 
- 
-    node unite(node a, node b) {
-        return node(a.sum+b.sum);
-    }
+
  
     void build(int x, int start, int end) {
         if (start == end) {
@@ -36,9 +37,8 @@ private:
         t[x] = unite(t[lc], t[rc]);  
     }
  
-    void push(int x, int start, int end) {
+    void push(int x, int start, int end) { // MAKE CHANGES HERE
         if (lazy[x].is_set) {  
- 
             t[x].sum = (end - start + 1) * lazy[x].set_val;
  
             if (start != end) {  
@@ -51,12 +51,12 @@ private:
             lazy[x].is_set = false;  
         } 
         t[x].sum += (end - start + 1) * lazy[x].add_val;
-
+ 
         if (start != end) { 
             lazy[lc].add_val += lazy[x].add_val;
             lazy[rc].add_val += lazy[x].add_val;
         }
-
+ 
         lazy[x].add_val = 0; 
     }
  
@@ -64,9 +64,7 @@ private:
         push(x, start, end); 
  
         if (l <= start && end <= r) {
-            if (add_value != 0) { 
-                lazy[x].add_val += add_value;
-            }
+            lazy[x].add_val += add_value;
             push(x, start, end);  
             return;
         }
@@ -96,7 +94,7 @@ private:
             push(x, start, end);  
             return;
         }
-
+ 
         if(r<=mid){
             push(rc,mid+1,end);
             set(lc,start,mid,l,r,set_value);
@@ -131,7 +129,7 @@ private:
  
  
 public:
-    LazySegmentTree(vector<int>&tmp) {
+    void build(vector<int>&tmp) {
         n = tmp.size();
         a = tmp;
         t.resize(2 * n);
