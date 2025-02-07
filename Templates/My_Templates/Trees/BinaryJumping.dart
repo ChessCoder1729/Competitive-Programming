@@ -77,7 +77,6 @@ class BinaryJump{
                 swap(a,b);
             }
             bin_node x,y;
-            // Bring to same depth
             x = kth(a,0);
             y = kth(b,depth[b]-depth[a]);
             bin_node ans = x;

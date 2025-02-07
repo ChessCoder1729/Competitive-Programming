@@ -10,7 +10,7 @@ struct LineContainer : multiset<line, less<>> {
 		return a / b - ((a ^ b) < 0 && a % b); 
 	}
 	
-    	bool isect(iterator x, iterator y) {
+    bool isect(iterator x, iterator y) {
 		if (y == end()){
             	x -> p = inf; 
             return false;
