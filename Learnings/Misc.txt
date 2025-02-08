@@ -15,5 +15,3 @@ ordered_set => set in vector form
 8. When using class and struct dont forget to put the value in the "global" variable
 9. Dont forget to put is_set = true in lazysegtree
 10. #define endl '\n'
-11. In HLD seg = new SegTree; if(depth[u]>depth[v]) and if(depth[head[u]]<depth[head[v]])
-12. In HLD dont forget depth[0] = 0, parent[0] = -1;

@@ -8,5 +8,8 @@ Other DP array calculates results outside of the subtree (sometimes only this)
 
 dist(u,v) = depth[u] + depth[v] - 2*depth[lca]	
 
+In HLD seg = new SegTree; if(depth[u]>depth[v]) and if(depth[head[u]]<depth[head[v]])
+In HLD dont forget depth[0] = 0, parent[0] = -1;
+
 
 	
