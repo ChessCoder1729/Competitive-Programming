@@ -12,7 +12,7 @@ struct LineContainer : multiset<line, less<>> {
 	
     bool isect(iterator x, iterator y) {
 		if (y == end()){
-            	x -> p = inf; 
+            x -> p = inf; 
             return false;
         }
 		if (x->m==y->m){

@@ -1,18 +1,12 @@
-Stacks (DATA STRUCTURES)
-Queues (DATA STRUCTURES)
-Binary Search (ALGORITHM) (Done)
-Hashing (ALGORITHM) (Done) 
-Tries (DATA STRUCTUREish)
-Trees(Including Generic Trees)
-Graphs (Done kindof)
-DSU (Done)
-Segment Trees (RANGE QUERIES) (Done kindof)
-Sparse Tables (RANGE QUERIES) (Not required)
-Expected Value (Done kindof)
-Probability 
-Number Theory (Done kindof)
-Combinatorics (Done kindof)
-Convex Hull Trick
-Binary Lifting
-Square Root Decompostion- Mo's algo
+Tries 
 Bitmask DP
+FFT/NTT or Geometry
+Suffix Automation/Array
+Sweep line
+Divide and Conquer
+Sweep Line
+Centroid Decomp
+HLD
+Bitsets, Bitmask DP (Urgent)
+Game Theory (Sprague–Grundy theorem)
+Range Queries( Persistence, segtree, tree descent)

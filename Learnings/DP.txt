@@ -1,0 +1,9 @@
+Bring like terms together
+Split into prefix sums
+Split into what happens for a given range and generalise
+
+Convex Hull Trick?
+Segment Tree?
+
+Convex Hull + Ternary Search-ish idea (https://www.youtube.com/live/rjUwmXD9N3k?si=g498EmaE3_U-Ys1b&t=5649)
+CHT on trees(https://www.youtube.com/watch?v=KX_-7AqcnEU&t=15138s)

@@ -65,7 +65,7 @@ struct HLD {
         }
         if (depth[u] > depth[v]) swap(u, v);
         seg->set(newPos[u], newPos[v],set_val);
-    }
+    }   
 
     void set_full(int set_val){
         seg -> set(0,n-1,set_val);

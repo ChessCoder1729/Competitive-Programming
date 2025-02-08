@@ -1,0 +1,12 @@
+Convert Tree to Array
+
+Binary Lifting
+
+It is a common technique to calculate two DP arrays
+One DP array for results within the subtree (Sometimes only this)
+Other DP array calculates results outside of the subtree (sometimes only this)
+
+dist(u,v) = depth[u] + depth[v] - 2*depth[lca]	
+
+
+	
