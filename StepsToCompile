@@ -1,6 +1,0 @@
-To compile a program the following steps have to be followed:
-1.) Go to C++ Programs and type cmd
-2.) Type g++ (Filename).cpp -o"(name of the output file)"
-3.) Click ENTER
-4.) Type (name of output file)
-5.) Click ENTER 

@@ -30,6 +30,39 @@ if os.path.exists("./1.txt"):
     sys.stdin = open("1.txt", "r")
     sys.stdout = open("2.txt", "w") 
 
+import array
+m = 10**18 + 31
+
+def binpow(n):
+    if(n==0):
+        return 1
+    x = binpow(n//2)
+    if(n%2==0):
+        return (x*x)%m
+    return (42*x*x)%m
+
+def main():
+    a = 960002411612632915
+    arr = []
+    last = binpow(719712190406269305)
+    arr.append(last)
+    n = 1
+    cnt = 0
+    while True:
+        if(n==100000):
+            break
+        last = binpow(last)
+        arr.append(last)
+        n = n+1
+        
+    for i in arr:
+        print(i, end = ",")
+
+if __name__ == "__main__":
+    main()
+    
+    
+
 # vector = [1,2,2]
 # print(vector)
 # set = {2,1,2}
