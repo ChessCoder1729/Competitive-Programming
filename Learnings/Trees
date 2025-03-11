@@ -6,10 +6,17 @@ It is a common technique to calculate two DP arrays
 One DP array for results within the subtree (Sometimes only this)
 Other DP array calculates results outside of the subtree (sometimes only this)
 
+If you are storing a vector or cht or some ds in nodes of tree, and you
+have to unite them to get something for a node.. 
+Consider the "heavy Child"
+
 dist(u,v) = depth[u] + depth[v] - 2*depth[lca]	
+
+Consider diameter of the tree?
 
 In HLD seg = new SegTree; if(depth[u]>depth[v]) and if(depth[head[u]]<depth[head[v]])
 In HLD dont forget depth[0] = 0, parent[0] = -1;
+
 
 
 	

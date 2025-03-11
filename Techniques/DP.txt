@@ -1,6 +1,0 @@
-Bring like terms together
-Split into prefix sums
-Split into what happens for a given range and generalise
-
-Convex Hull Trick?
-Segment Tree?

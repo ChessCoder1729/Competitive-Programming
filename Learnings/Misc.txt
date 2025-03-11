@@ -1,6 +1,9 @@
 1. DP?
 2. Try answering queries in reverse order?
 
+Square Root Decomp Type? (Solve Q in 2 methods.. one method will be used for 
+<=sqrt(n) other for greater)
+
 3. Check for queue, priorioty_queue, stack, ordered_set solutions
 stack => LIFO (whatever goes in last comes out last)
 queue => FIFO (whatever goes in first comes out first)

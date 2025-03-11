@@ -1,5 +1,0 @@
-For some function(say shortest distance) between 2 nodes(u,v)
-One array which calculates for all nodes with respect to u
-and similarly other for v
-And then just unite them
-

@@ -1,0 +1,8 @@
+mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
+
+If I want to shuffle vector:
+shuffle(v.begin(),v.end(),rng) O(n)
+
+If I want to take random int between p and q
+uniform_int_distribution <int> range(p,q);
+cout << range(rng);

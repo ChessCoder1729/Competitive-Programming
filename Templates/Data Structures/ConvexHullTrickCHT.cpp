@@ -7,12 +7,12 @@ struct line {
 struct LineContainer : multiset<line, less<>> {
 	// (for doubles, use inf = 1/.0, ceil(a,b) = a/b)
 	int div(int a, int b) { // floored division
-		return a / b - ((a ^ b) < 0 && a % b); 
+		return a / b - ((a ^ b) < 0 && a % b);
 	}
-	
+
     bool isect(iterator x, iterator y) {
 		if (y == end()){
-            x -> p = inf; 
+            x -> p = inf;
             return false;
         }
 		if (x->m==y->m){
