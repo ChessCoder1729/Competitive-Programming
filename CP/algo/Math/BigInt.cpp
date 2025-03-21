@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class BigInt {
 private:
     vector<int> digits;  // Digits are stored in reverse order
@@ -207,7 +210,7 @@ bool BigInt::operator>(const BigInt& other) const {
     return other < *this;
 }
 
- 
+
 // Static function to sort a vector of BigInt
 void BigInt::sortBigIntVector(vector<BigInt>& v) {
     sort(v.begin(), v.end(), [](const BigInt& a, const BigInt& b) { return a < b; });

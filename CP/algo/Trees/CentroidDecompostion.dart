@@ -29,22 +29,20 @@ struct CentroidDecomp{
         return node;
     }
 
-    void get_dist(int node, int par, int root, int curr_dist = 0){
+    void get_ancestors(int node, int par, int root, int curr_dist = 0){
         if(node!=root) ancestors[node].pb({root,curr_dist});
-        curr_dist++;
         for(auto child : adj[node]){
             if(!vis[child] and child!=par){
-                get_dist(child,node,root,curr_dist);
+                get_ancestors(child,node,root,curr_dist+1);
             }
         }
-
     }
 
     void decompose(int root, int par = -1){
         dfs(root,par);
         int centroid = get_centroid(root,root,par);
 
-        get_dist(centroid,centroid,centroid);
+        get_ancestors(centroid,centroid,centroid);
         vis[centroid] = true;
 
         for(auto child : adj[centroid]){
@@ -54,14 +52,14 @@ struct CentroidDecomp{
         }
     }
 
-    void update(int node){
+    void update(int node){ // Note that ancestors doesnt contain the node itself
 
         for(auto [u,d]:ancestors[node]){
 
         }
     }
 
-    int query(int node){
+    int query(int node){ // Note that ancestors doesnt contain the node itself
 
         for(auto [u,d]:ancestors[node]){
 

@@ -1,3 +1,9 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+typedef long long ll;
+const int mod = 1e9 + 7;
+
 ll add(ll a, ll b){
     return (a+b)%mod;
 }
