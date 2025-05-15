@@ -11,10 +11,13 @@ priority_queue => Dynamic queries of minimum/maximum
 ordered_set => set in vector form
 [order_of_key(k) gives number of elements less than k, find_by_order(i) gives i^th element]
 
-4. n/1 + n/2 + n/3 .... = nlogn
-5. Binary Search the Answer(or just Binary Search)
-6. Bitmask
-7. For sets use s.lower_bound() 
-8. When using class and struct dont forget to put the value in the "global" variable
-9. Dont forget to put is_set = true in lazysegtree
-10. #define endl '\n'
+4. Binary Search the Answer(or just Binary Search)
+5. Bitmask
+6. For sets use s.lower_bound() 
+7. When using class and struct dont forget to put the value in the "global" variable
+8. Dont forget to put is_set = true in lazysegtree
+9. #define endl '\n'
+
+10. Number of swaps in bubble sort = Number of inversions in the array
+11. Consider array elements as points on coordinate plane (a[i],i)
+12. Bitset? (n = 5e4 or something suggests bitset)

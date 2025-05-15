@@ -7,7 +7,7 @@ using namespace __gnu_pbds;
 template <class T>
 using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define endl '\n';
-#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define fastio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define py cout << "YES" << endl;
 #define pn cout << "NO" << endl;
 #define pb push_back
@@ -18,11 +18,11 @@ const ll inf = 1e18;
 const ll mod = 1e9+7;
 
 
-#ifndef ONLINE_JUDGE
-#include "algo/Standard_Stuff/debug.cpp"
-#else
-#define debug(...) 42
-#endif
+// #ifndef ONLINE_JUDGE
+// #include "algo/Standard_Stuff/debug.cpp"
+// #else
+// #define debug(...) 42
+// #endif
 
 void judge(){
     srand(time(NULL));
@@ -32,23 +32,26 @@ void judge(){
     #endif
 }
 
-// Look for edge cases!!!
-signed main(){
-    fastio; judge();
-    int n,x; cin >> n >> x;
-    vector<int>a(n); for(auto &x : a) cin >> x;
-    map<int,pair<int,int>>mp;
-    for(int i = 0;i<n;i++){
-        for(int j = i+1;j<n;j++){
-            int trgt = x - a[i] - a[j];
-            if(mp.count(trgt)){
-                cout << mp[trgt].first << ' ' << mp[trgt].second << ' ' << i+1 << ' ' << j+1 << endl;
-                return 0;
-            }
-        }
-        for(int j = 0;j<i;j++){
-            mp[a[i]+a[j]] = {i+1,j+1};
-        }
+void codeforces_solver(){
+    int n; cin >> n;
+    if(n%2==0){
+        cout << -1 << endl; return;
     }
-    cout << "IMPOSSIBLE";
+    cout << n << ' ';
+    for(int i = 1;i<n;i++){
+        cout << i << ' ';
+    }
+    cout << endl;
+}
+
+signed main(){
+    fastio; //judge();
+    int tc = 1; cin >> tc;
+    for(int testcase = 1;testcase<=tc;testcase++){
+        //cout << "Case #" << testcase << ": ";
+        codeforces_solver();
+
+
+        // cout << "------------------------------------------" << endl;
+    }
 }

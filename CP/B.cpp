@@ -7,9 +7,10 @@ using namespace __gnu_pbds;
 template <class T>
 using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define endl '\n';
-#define fastio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL);
 #define py cout << "YES" << endl;
 #define pn cout << "NO" << endl;
+#define all(x) (x).begin(), (x).end()
 #define pb push_back
 #define int long long
 typedef long long ll;
@@ -32,8 +33,8 @@ void judge(){
     #endif
 }
 
-
+// Look for edge cases!!!
 signed main(){
     fastio; judge();
-
+    
 }

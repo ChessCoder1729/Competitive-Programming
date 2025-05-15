@@ -32,23 +32,40 @@ void judge(){
     #endif
 }
 
+void compress(vector<int>&a){
+    int n = a.size();
+    vector<int>vec;
+    map<int,int>mp;
+    int curr = 0;
+    for(int i = 0;i<n;i++){
+        if(mp.count(a[i])){
+            vec.pb(mp[a[i]]);
+        }
+        else{
+            mp[a[i]] = curr;
+            vec.pb(curr);
+            curr++;
+        }
+    }
+    a = vec;
+}
+
 // Look for edge cases!!!
 signed main(){
     fastio; judge();
-    int n,x; cin >> n >> x;
-    vector<int>a(n); for(auto &x : a) cin >> x;
-    map<int,pair<int,int>>mp;
-    for(int i = 0;i<n;i++){
-        for(int j = i+1;j<n;j++){
-            int trgt = x - a[i] - a[j];
-            if(mp.count(trgt)){
-                cout << mp[trgt].first << ' ' << mp[trgt].second << ' ' << i+1 << ' ' << j+1 << endl;
-                return 0;
-            }
-        }
-        for(int j = 0;j<i;j++){
-            mp[a[i]+a[j]] = {i+1,j+1};
-        }
+    int n; cin >> n;
+    vector<int>a(n);
+    for(auto &x : a) cin >> x;
+    compress(a);
+
+    vector<int>count(n,0);
+    for(auto x : a){
+        count[x]++;
     }
-    cout << "IMPOSSIBLE";
+    int ans = 1;
+    for(int i = 0;i<n;i++){
+        ans = (ans*(count[i]+1))%mod;
+    }
+    ans--;
+    cout << ans;
 }

@@ -32,23 +32,45 @@ void judge(){
     #endif
 }
 
-// Look for edge cases!!!
-signed main(){
-    fastio; judge();
-    int n,x; cin >> n >> x;
-    vector<int>a(n); for(auto &x : a) cin >> x;
-    map<int,pair<int,int>>mp;
-    for(int i = 0;i<n;i++){
-        for(int j = i+1;j<n;j++){
-            int trgt = x - a[i] - a[j];
-            if(mp.count(trgt)){
-                cout << mp[trgt].first << ' ' << mp[trgt].second << ' ' << i+1 << ' ' << j+1 << endl;
-                return 0;
-            }
-        }
-        for(int j = 0;j<i;j++){
-            mp[a[i]+a[j]] = {i+1,j+1};
+int power_9(int d){int ans = 1; while(d--) ans *= 9; return ans;}
+
+bool is_good(int x){
+    string s = to_string(x);
+    for(int i = 0;i<(int)(s.size())-1;i++){
+        if(s[i]==s[i+1]){
+            return false;
         }
     }
-    cout << "IMPOSSIBLE";
+    return true;
+}
+
+int count(int x){
+    if(x<=0){
+        return x+1;
+    }
+
+    string s = to_string(x);
+    int d = s.size();
+    int ans = 1 + is_good(x);
+
+    ans += (power_9(d) - 9)/8;
+
+    ans += (int)(s[0]-'1')*power_9(d-1);
+
+    for(int i = 1;i<d;i++){
+        int lesser = (s[i]-'0') - (s[i-1]<s[i]);
+        ans += lesser*power_9(d-i-1);
+        if(s[i]==s[i-1]){
+            return ans;
+        }
+    }
+
+    return ans;
+}
+
+
+signed main(){
+    fastio; judge();
+    int l,r; cin >> l >> r;
+    cout << count(r) - count(l-1);
 }

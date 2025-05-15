@@ -4,21 +4,26 @@ using namespace std;
 typedef long long ll;
 const int mod = 1e9 + 7;
 
-ll add(ll a, ll b){
-    return (a+b)%mod;
+int mul(int x, int y) {
+    return int((ull)x * y % mod);
 }
-ll prod(ll a, ll b){
-    return (a*b)%mod;
+int add(int x, int y) {
+    return x + y - (x + y >= mod) * mod;
 }
-ll qexp(ll a, ll b, ll m) {
-    ll res = 1;
+int sub(int x, int y) {
+    return x - y + (x < y) * mod;
+}
+
+int qexp(int a, int b = mod-2, int m = mod) {
+    if(mp.count(a)){
+        return mp[a];
+    }
+    int res = 1;
     while (b) {
-        if (b % 2) res = prod(res,a);
-        a = prod(a,a);
+        if (b % 2) res =  mul(res,a);
+        a = mul(a,a);
         b /= 2;
     }
     return res;
-}
-ll modinverse(ll n, ll prime=mod){// Only for 1 number
-    return qexp(n,prime-2,prime);
+    return mp[a] = res;
 }

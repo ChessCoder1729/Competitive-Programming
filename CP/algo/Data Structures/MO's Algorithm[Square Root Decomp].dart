@@ -1,63 +1,93 @@
-struct Query { // to create vector just do vector<Mos::Query>q
-    int l, r, idx;  
-    
-    bool operator<(const Query& q) const {
-        int block_size = sqrt(2e5); // Set block size to sqrt(2e5)
-        if (l / block_size != q.l / block_size)
-            return l / block_size < q.l / block_size;
-        return r < q.r;
+inline int64_t hilbertOrder(int x, int y, int pow, int rotate) {
+	if (pow == 0) {
+		return 0;
+	}
+	int hpow = 1 << (pow-1);
+	int seg = (x < hpow) ? (
+		(y < hpow) ? 0 : 3
+	) : (
+		(y < hpow) ? 1 : 2
+	);
+	seg = (seg + rotate) & 3;
+	const int rotateDelta[4] = {3, 0, 0, 1};
+	int nx = x & (x ^ hpow), ny = y & (y ^ hpow);
+	int nrot = (rotate + rotateDelta[seg]) & 3;
+	int64_t subSquareSize = int64_t(1) << (2*pow - 2);
+	int64_t ans = seg * subSquareSize;
+	int64_t add = hilbertOrder(nx, ny, pow-1, nrot);
+	ans += (seg == 1 || seg == 2) ? add : (subSquareSize - add - 1);
+	return ans;
+}
+
+struct Query {
+    int l, r, idx,kx;
+    int64_t ord;
+
+    inline void calc_order(){
+        ord = hilbertOrder(l,r,21,0);
+    }
+
+    bool operator<(const Query& q) {
+        return ord < q.ord;
     }
 };
-class Mos {
-private:
+
+struct Mos {
     vector<int> a;
     int n;
-    int block_size;
+    int current_answer;
 
-    // Function to add an element to the current range
-    void add_right(int idx, vector<int>& op, int& current_answer) {
-        op[a[idx]]++;
-    }
-    void add_left(int idx, vector<int>& op, int& current_answer){
-        op[a[idx]]++;
+    void add_right(int idx) {
+
     }
 
-    // Function to remove an element from the current range
-    void remove_right(int idx, vector<int>& op, int& current_answer) {
-        op[a[idx]]--;
-    }
-    void remove_left(int idx, vector<int>& op, int& current_answer){
-        op[a[idx]]--;
+    void add_left(int idx){
+
     }
 
-public:
+    void remove_right(int idx){
 
-    // Constructor to initialize the array and precompute the block size
-    Mos(const vector<int>& a) : a(a), n(a.size()) {
-        block_size = (int)sqrt(2e5);  // Set block size to sqrt(2e5)
     }
-    
-    // Function to answer range queries without sorting
+
+    void remove_left(int idx) {
+
+    }
+
+    Mos(const vector<int>& a) : a(a), n(a.size()) {}
+
     vector<int> processQueries(vector<Query>& queries) {
+
+        for(auto &q : queries){
+            q.calc_order();
+        }
+
         vector<int> result(queries.size());
         sort(queries.begin(),queries.end());
-        
-        vector<int>op(n+1,0); // The operation on the element
 
-        int left = 0, right = -1, current_answer = 0;
 
-        // Process each query without sorting
-        for (const auto& query : queries) {
-            // Move the right pointer to the query's right boundary
-            while (right < query.r) { add_right(++right, op, current_answer); }
-            while (right > query.r) { remove_right(right--, op, current_answer); }
+        int left = 0, right = -1; current_answer = 0;
 
-            // Move the left pointer to the query's left boundary
-            while (left < query.l) { remove_left(left++, op, current_answer); }
-            while (left > query.l) { add_left(--left, op, current_answer); }
+        for (const auto& q : queries) {
 
-            // Store the result for the current query
-            result[query.idx] = current_answer;
+            while (right < q.r) {
+                right++;
+                add_right(right);
+            }
+            while (right > q.r) {
+                remove_right(right);
+                right--;
+            }
+
+            while (left < q.l) {
+                remove_left(left);
+                left++;
+            }
+            while (left > q.l) {
+                left--;
+                add_left(left);
+            }
+
+            result[q.idx] = ?;
         }
 
         return result;

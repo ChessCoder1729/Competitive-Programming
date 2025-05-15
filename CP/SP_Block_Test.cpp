@@ -1,5 +1,6 @@
-include <bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 using namespace std::chrono;
 
 // Helper function to lowercase a string
@@ -29,7 +30,7 @@ int main()
 
     do
     {
-        int randomIndex = rand() % atomicNumbers.size();
+        int randomIndex = rng() % atomicNumbers.size();
         int atomicNumber = atomicNumbers[randomIndex];
         string elementName = atomicData[atomicNumber].first;
         string elementSymbol = atomicData[atomicNumber].second;

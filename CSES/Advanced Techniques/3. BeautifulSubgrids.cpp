@@ -1,5 +1,5 @@
-// #pragma GCC optimize("O3,unroll-loops")
-// #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 using namespace std;
@@ -7,7 +7,7 @@ using namespace __gnu_pbds;
 template <class T>
 using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define endl '\n';
-#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define fastio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define py cout << "YES" << endl;
 #define pn cout << "NO" << endl;
 #define pb push_back
@@ -32,23 +32,24 @@ void judge(){
     #endif
 }
 
-// Look for edge cases!!!
+
 signed main(){
     fastio; judge();
-    int n,x; cin >> n >> x;
-    vector<int>a(n); for(auto &x : a) cin >> x;
-    map<int,pair<int,int>>mp;
+    int n; cin >> n;
+    vector<bitset<3000>>vec(n);
     for(int i = 0;i<n;i++){
-        for(int j = i+1;j<n;j++){
-            int trgt = x - a[i] - a[j];
-            if(mp.count(trgt)){
-                cout << mp[trgt].first << ' ' << mp[trgt].second << ' ' << i+1 << ' ' << j+1 << endl;
-                return 0;
-            }
-        }
-        for(int j = 0;j<i;j++){
-            mp[a[i]+a[j]] = {i+1,j+1};
+        string s; cin >> s;
+        for(int j = 0;j<n;j++){
+            vec[i][j] = (s[j]-'0');
         }
     }
-    cout << "IMPOSSIBLE";
+
+    int ans = 0;
+    for(int i = 0;i<n;i++){
+        for(int j = i+1;j<n;j++){
+            int x = (vec[i]&vec[j]).count();
+            ans += (x*(x-1))/2;
+        }
+    }
+    cout << ans;
 }

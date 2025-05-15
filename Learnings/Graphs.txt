@@ -1,9 +1,8 @@
 Some common ways for solving a Graph Problem
 
-1. Topological Sort (Problems generally say "no directed cycles")
-a. This gives an ordering such that node u comes before node v if node u is connected to node v
-b. It is useful for questions involving DAG[Directed Acyclic Graph]
-c. If you want a DFS to start at node u just do DFS Method starting with node u
+1. Directed Graphs
+a. If no cycles => Topological sorting
+b. Otherwise, SCC decomposition and then make it to Topological
 
 2. UFDS(or DSU)
 a. This gives a structure for giving nodes that are connected to each other
@@ -12,3 +11,6 @@ b. We can join nodes together and get values of connected componenets
 3. DFS/BFS
 a. if we just want to do a Depth First Search(pretty useful for various stuff)
 b. If we want to find shortest distance etc. Breadth First Search is good.
+
+If there are states for a problem, for example you can go either vertical
+or horizontal, make vertices for all the states..

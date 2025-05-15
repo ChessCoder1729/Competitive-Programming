@@ -7,7 +7,7 @@ using namespace __gnu_pbds;
 template <class T>
 using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define endl '\n';
-#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL);
+#define fastio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define py cout << "YES" << endl;
 #define pn cout << "NO" << endl;
 #define pb push_back
@@ -32,23 +32,32 @@ void judge(){
     #endif
 }
 
-// Look for edge cases!!!
+int to_int(string &s){
+    int curr = 0;
+    for(int i = 0;i<(int)(s.size());i++){
+        curr += (1<<i)*(s[i]-'0');
+    }
+    return curr;
+}
+
+
 signed main(){
     fastio; judge();
-    int n,x; cin >> n >> x;
-    vector<int>a(n); for(auto &x : a) cin >> x;
-    map<int,pair<int,int>>mp;
+    int n,k; cin >> n >> k;
+
+    vector<int>a(n);
+    for(int i = 0;i<n;i++){
+        string s; cin >> s;
+        a[i] = to_int(s);
+    }
+
+    int best = inf;
     for(int i = 0;i<n;i++){
         for(int j = i+1;j<n;j++){
-            int trgt = x - a[i] - a[j];
-            if(mp.count(trgt)){
-                cout << mp[trgt].first << ' ' << mp[trgt].second << ' ' << i+1 << ' ' << j+1 << endl;
-                return 0;
-            }
-        }
-        for(int j = 0;j<i;j++){
-            mp[a[i]+a[j]] = {i+1,j+1};
+            int x = a[i]^a[j];
+            int cnt = __builtin_popcount(x);
+            best = min(best,cnt);
         }
     }
-    cout << "IMPOSSIBLE";
+    cout << best;
 }

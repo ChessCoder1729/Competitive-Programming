@@ -35,20 +35,17 @@ void judge(){
 // Look for edge cases!!!
 signed main(){
     fastio; judge();
-    int n,x; cin >> n >> x;
-    vector<int>a(n); for(auto &x : a) cin >> x;
-    map<int,pair<int,int>>mp;
-    for(int i = 0;i<n;i++){
-        for(int j = i+1;j<n;j++){
-            int trgt = x - a[i] - a[j];
-            if(mp.count(trgt)){
-                cout << mp[trgt].first << ' ' << mp[trgt].second << ' ' << i+1 << ' ' << j+1 << endl;
-                return 0;
-            }
-        }
-        for(int j = 0;j<i;j++){
-            mp[a[i]+a[j]] = {i+1,j+1};
-        }
+    int n,k; cin >> n >> k;
+    ordered_set<int>s;
+    for(int i = 1;i<=n;i++){
+        s.insert(i);
     }
-    cout << "IMPOSSIBLE";
+    int pos = 0;
+    for(int i = 1;i<=n;i++){
+        pos += k;
+        pos %= s.size();
+        int val = *s.find_by_order(pos);
+        cout << val << ' ';
+        s.erase(s.find(val));
+    }
 }
