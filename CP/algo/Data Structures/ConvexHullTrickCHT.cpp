@@ -10,33 +10,33 @@ struct LineContainer : multiset<line, less<>> {
 		return a / b - ((a ^ b) < 0 && a % b);
 	}
 
-    bool isect(iterator x, iterator y) {
+    	bool isect(iterator x, iterator y) {
 		if (y == end()){
-            x -> p = inf;
-            return false;
-        }
+            		x -> p = inf;
+            		return false;
+       	}
 		if (x->m==y->m){
 			x->p = -1*inf;
-            if (x->c > y->c) {
-                x->p = inf;
-            }
-        }
+            		if (x->c > y->c) {
+                		x->p = inf;
+           		}
+       	}
 		else{
-            x->p = div(y->c - x->c, x->m - y->m);
-        }
+            		x->p = div(y->c - x->c, x->m - y->m);
+        	}
 		return x->p >= y->p;
 	}
 	void add(int m, int c) {
 		auto it = insert({m, c, 0}) , next = it++, prev = next;
 		while (isect(next, it)){
-            it = erase(it);
-        }
+            		it = erase(it);
+        	}
 		if (prev != begin() && isect(--prev, next)){
-            isect(prev, next = erase(next));
-        }
+            		isect(prev, next = erase(next));
+        	}
 		while ((next = prev) != begin() && (--prev)->p >= next->p){
-            isect(prev, erase(next));
-        }
+            		isect(prev, erase(next));
+        	}
 	}
 	int query(int x) {
 		auto l = *lower_bound(x);

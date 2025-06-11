@@ -2,28 +2,28 @@ struct CentroidDecomp{
     vector<vector<int>>adj;
     vector<int>sz;
     vector<bool>vis;
-    vector<int>parent;
     vector<vector<pair<int,int>>>ancestors;
     int main_root;
 
-    void dfs(int node, int par = -1){
+
+    void get_size(int node, int par = -1){
         sz[node] = 1;
         for(auto child : adj[node]){
             if(child==par or vis[child]){
                 continue;
             }
-            dfs(child,node);
+            get_size(child,node);
             sz[node] += sz[child];
         }
     }
 
-    int get_centroid(int node, int root, int par){
+    int get_centroid(int node, int par, int root){
         for(auto child : adj[node]){
             if(child==par or vis[child]){
                 continue;
             }
             if(sz[child]*2>sz[root]){
-                return get_centroid(child,root,node);
+                return get_centroid(child,node,root);
             }
         }
         return node;
@@ -39,8 +39,8 @@ struct CentroidDecomp{
     }
 
     void decompose(int root, int par = -1){
-        dfs(root,par);
-        int centroid = get_centroid(root,root,par);
+        get_size(root,par);
+        int centroid = get_centroid(root,par,root);
 
         get_ancestors(centroid,centroid,centroid);
         vis[centroid] = true;
@@ -71,7 +71,6 @@ struct CentroidDecomp{
         sz.resize(n);
         vis.assign(n, false);
         ancestors.resize(n);
-        parent.resize(n, -1);
     }
 
     void builder(vector<vector<int>>&tmp){
