@@ -8,10 +8,10 @@ struct node{ // Make changes here
 class SegTree{
     #define lc x+1
     #define rc 2*(mid-start+1) + x
-    
+
     int n; vector<node>t; vector<int>a;
 
-    node unite(node a, node b){ // Make changes here    
+    node unite(node a, node b){ // Make changes here
         return node(a.sum+b.sum);
     }
 
@@ -32,7 +32,7 @@ class SegTree{
             if(start==end){
                 t[x] = node(val); return;
             }
-            int mid = (start+end)/2; 
+            int mid = (start+end)/2;
             if(idx<=mid){
                 update(lc,start,mid,idx,val);
             }
@@ -56,8 +56,8 @@ class SegTree{
             else{
                 return unite(query(lc,start,mid,l,r),query(rc,mid+1,end,l,r));
             }
-        }  
-    
+        }
+
     public:
         SegTree(vector<int>& tmp){
             n = tmp.size();

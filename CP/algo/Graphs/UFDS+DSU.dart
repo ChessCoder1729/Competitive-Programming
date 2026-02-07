@@ -1,8 +1,8 @@
 struct ufds{
-    vector<int>par; 
-    vector<int>sz; 
-    ufds(int n){
-        par.resize(n); 
+    vector<int>par;
+    vector<int>sz;
+    void init(int n){
+        par.resize(n);
         sz.resize(n);
         for(int i = 0;i<n;i++){
             par[i] = i; sz[i] = 1;
@@ -23,4 +23,4 @@ struct ufds{
             sz[v] += sz[u];
         }
     }
-}; 
+};

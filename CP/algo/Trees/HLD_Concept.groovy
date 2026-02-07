@@ -9,8 +9,8 @@ Decompose into chains
 For each query
 while (head[u] != head[v]) {
        if (depth[head[u]] < depth[head[v]]) swap(u, v);
-       seg->query(newPos[head[u]], newPos[u],set_val);
+       seg->query(newPos[head[u]], newPos[u]);
        u = parent[head[u]];
 }
 if (depth[u] > depth[v]) swap(u, v);
-seg->set(newPos[u], newPos[v],set_val);
+seg->query(newPos[u], newPos[v]);

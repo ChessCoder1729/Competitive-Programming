@@ -15,6 +15,7 @@ struct Kosaraju{
 
     void strongly_connected_components(vector<vector<int>>&adj){
         int n = adj.size();
+
         vector<int>order;
         visited.assign(n,false);
         for(int i = 0;i<n;i++){
@@ -22,26 +23,32 @@ struct Kosaraju{
                 dfs(i,adj, order);
             }
         }
+
         vector<vector<int>>adj_rev(n);
         for(int v = 0;v<n;v++){
             for(auto u : adj[v]){
                 adj_rev[u].pb(v);
             }
         }
-        visited.assign(n,false);
+
         reverse(all(order));
+
         vector<int>roots(n,0);
+        visited.assign(n,false);
         for(auto v : order){
             if(!visited[v]){
+
                 vector<int>component;
                 dfs(v,adj_rev,component);
                 components.pb(component);
+
                 int root = *component.begin();
                 for(auto u : component){
                     roots[u] = root;
                 }
             }
         }
+
         adj_cond.assign(n,{});
         for(int v = 0;v<n;v++){
             for(auto u : adj[v]){
@@ -52,4 +59,5 @@ struct Kosaraju{
         }
     }
 };
+// component stores in topologicial order
 // adj_cond -> directed graph with cycle to DAG

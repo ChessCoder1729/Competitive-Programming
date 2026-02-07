@@ -24,3 +24,11 @@ void euler_tour(int node, int par) {
 	end[node] = timer;
     start[node]--; end[node]--; // for 0 based indexing
 }
+
+
+/*
+Alternate Way of Flattening :
+Everytime you visit the node, put the node into your array, instead of waiting for the process in subtree to end
+Don't put a node consecutively twice
+(Used in finding LCA)
+*/

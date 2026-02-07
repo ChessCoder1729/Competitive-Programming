@@ -13,7 +13,7 @@ struct CentroidDecomp{
                 continue;
             }
             get_size(child,node);
-            sz[node] += sz[child];
+            sz[node] += sz[child];  
         }
     }
 

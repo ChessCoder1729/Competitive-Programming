@@ -20,7 +20,7 @@ inline int64_t hilbertOrder(int x, int y, int pow, int rotate) {
 }
 
 struct Query {
-    int l, r, idx,kx;
+    int l, r, idx;
     int64_t ord;
 
     inline void calc_order(){
@@ -37,23 +37,14 @@ struct Mos {
     int n;
     int current_answer;
 
-    void add_right(int idx) {
+    void add(){
 
     }
 
-    void add_left(int idx){
-
+    void init(vector<int>&vec){
+        a = vec;
+        n = (int)(a.size());
     }
-
-    void remove_right(int idx){
-
-    }
-
-    void remove_left(int idx) {
-
-    }
-
-    Mos(const vector<int>& a) : a(a), n(a.size()) {}
 
     vector<int> processQueries(vector<Query>& queries) {
 
@@ -62,7 +53,7 @@ struct Mos {
         }
 
         vector<int> result(queries.size());
-        sort(queries.begin(),queries.end());
+        sort(all(queries));
 
 
         int left = 0, right = -1; current_answer = 0;
