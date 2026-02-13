@@ -31,6 +31,7 @@ struct SparseTable{
     }
 
     void pre(){
+        // table[i][j] has value from [i, i + (1<<j) )
         for(int i = 0;i<n;i++){
             table[i][0] = a[i];
         }

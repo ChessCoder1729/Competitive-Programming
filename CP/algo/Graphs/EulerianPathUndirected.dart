@@ -7,10 +7,10 @@ we take in the cycle, it should work
 
 */
 
-
+// Watch out for m = 0(number of edges)
 struct EulerainPathUndirected{
     vector<vector<int>>adj;
-    vector<int>self_edges;
+    vector<int>self_edges_count;
     vector<int>deg;
     vector<bool>visited_edge;
     vector<pair<int,int>>edges;
@@ -20,12 +20,12 @@ struct EulerainPathUndirected{
 
     void clean(){
         vector<vector<int>>vec(n);
-        self_edges.resize(n,0);
+        self_edges_count.resize(n,0);
         int idx = 0;
         for(int u = 0;u<n;u++){
             for(auto v : adj[u]){
                 if(u==v){
-                    self_edges[u]++;
+                    self_edges_count[u]++;
                 }
                 else if(u<v){
                     vec[u].pb(idx);
@@ -34,7 +34,7 @@ struct EulerainPathUndirected{
                     edges.pb({u,v});
                 }
             }
-            self_edges[u] /= 2;
+            self_edges_count[u] /= 2;
         }
         adj = vec;
     }
@@ -63,14 +63,14 @@ struct EulerainPathUndirected{
             edges.pb({v1,v2});
         }
         edges_count = (int)(edges.size());
-        edges_count += accumulate(all(self_edges), 0LL);
+        edges_count += accumulate(all(self_edges_count), 0LL);
 
         return (cnt==0 or cnt==2);
     }
 
     int find_start(){
         for(int i = 0;i<n;i++){
-            if(deg[i]>0 or self_edges[i]>0){
+            if(deg[i]>0 or self_edges_count[i]>0){
                 return i;
             }
         }
@@ -102,13 +102,14 @@ struct EulerainPathUndirected{
                 self(self,child);
             }
             path.pb(node);
-            for(int i = 1;i<=self_edges[node];i++){
+            for(int i = 1;i<=self_edges_count[node];i++){
                 path.pb(node);
             }
-            self_edges[node]=0;
+            self_edges_count[node]=0;
         }
         //
         dfs(dfs,start);
+        // If there is no v1, v2
         if(v1==-1){
             if((int)(path.size())==edges_count+1){
                 return path;

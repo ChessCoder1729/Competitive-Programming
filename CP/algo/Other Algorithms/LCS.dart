@@ -1,5 +1,6 @@
 int longestCommonSubsequence(string s1, string s2) {
-    int dp[s1.size()][s2.size()]; bool yes = false;
+    int dp[s1.size()][s2.size()];
+    bool yes = false;
     for(int i = 0;i<s2.size();i++){
         if(s1[0]==s2[i]){
             yes = true;

@@ -24,7 +24,7 @@ vector<int> build_topo(vector<vector<int>>&adj){
         }
     }
     if(topo.size()<n){
-        return {-1};
+        return {};
     }
     return topo;
 }

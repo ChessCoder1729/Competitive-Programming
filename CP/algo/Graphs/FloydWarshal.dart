@@ -1,11 +1,11 @@
-    // For distances between any 2 nodes in graph
+// For distances between any 2 nodes in graph
 
 // Time Complexity : O(N^3)
 
 
-vector<vector<ll>>flyod_warshal(vector<vector<pair<int,int>>>&adj){
+vector<vector<int>>flyod_warshal(vector<vector<pair<int,int>>>&adj){
     int n = adj.size();
-    vector<vector<ll>>dist(n, vector<ll>(n,inf));
+    vector<vector<int>>dist(n, vector<ll>(n,inf));
     for(int i = 0;i<n;i++)dist[i][i] = 0;
 
     for(int node = 0;node<n;node++){
@@ -25,7 +25,7 @@ vector<vector<ll>>flyod_warshal(vector<vector<pair<int,int>>>&adj){
     }
     for(int i = 0;i<n;i++){
         if(dist[i][i]<0){
-            return {{-1}}; // not possible that is negative cycle
+            return {{-1}}; // not possible (negative cycle)
         }
     }
     return dist;

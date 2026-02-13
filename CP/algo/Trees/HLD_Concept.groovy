@@ -14,3 +14,4 @@ while (head[u] != head[v]) {
 }
 if (depth[u] > depth[v]) swap(u, v);
 seg->query(newPos[u], newPos[v]);
+

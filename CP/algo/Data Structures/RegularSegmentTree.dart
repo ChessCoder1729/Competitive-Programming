@@ -50,12 +50,10 @@ class SegTree{
             if(r<=mid){
                 return query(lc,start,mid,l,r);
             }
-            else if(mid<l){
+            if(mid<l){
                 return query(rc,mid+1,end,l,r);
             }
-            else{
-                return unite(query(lc,start,mid,l,r),query(rc,mid+1,end,l,r));
-            }
+            return unite(query(lc,start,mid,l,r),query(rc,mid+1,end,l,r));
         }
 
     public:

@@ -5,6 +5,7 @@ rest have indegree = outdegree
 */
 
 // Watch out for m = 0 (number of edges)
+// It also accounts for self edges though no other code required specifically for it
 struct EulerainPathDirected{
     vector<vector<int>>adj;
     vector<int>indeg,outdeg,path;

@@ -52,7 +52,7 @@ struct Kosaraju{
         adj_cond.assign(n,{});
         for(int v = 0;v<n;v++){
             for(auto u : adj[v]){
-                if(roots[v]!=roots[u]){
+                if(roots[v]!=roots[u]){ // IMPORTANT 
                     adj_cond[roots[v]].pb(roots[u]);
                 }
             }

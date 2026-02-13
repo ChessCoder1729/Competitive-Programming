@@ -49,7 +49,7 @@ struct SparseTable{
         if(l > r){swap(l,r);}
         int d = r - l + 1;
         int p = log_2[d];
-        return unite(table[l][p],table[r-(1<<p)+1][p]).second;
+        return unite(table[l][p],table[r-(1<<p)+1][p]).second; // returns the index of the minima
     }
 };
 
