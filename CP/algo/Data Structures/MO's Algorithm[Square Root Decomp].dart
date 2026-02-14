@@ -37,8 +37,17 @@ struct Mos {
     int n;
     int current_answer;
 
-    void add(){
+    void add_right(){
 
+    }
+    void add_left(){
+
+    }
+    void remove_left(){
+
+    }
+    void remove_right(){
+        
     }
 
     void init(vector<int>&vec){

@@ -109,6 +109,7 @@ struct EulerainPathUndirected{
         }
         //
         dfs(dfs,start);
+        
         // If there is no v1, v2
         if(v1==-1){
             if((int)(path.size())==edges_count+1){

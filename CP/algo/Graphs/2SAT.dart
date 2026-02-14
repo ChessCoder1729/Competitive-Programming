@@ -24,7 +24,7 @@ struct Two_SAT{
     }
     bool check(){
         for(int i = 1;i<=n/2;i++){
-            if(root[i]==root[i+n/2]){
+            if(root[i]==root[i+n/2]){ // lie in same SCC
                 return false;
             }
         }
@@ -42,7 +42,7 @@ struct Two_SAT{
             return x - n/2;
         };
         vector<int>val(n,0);
-        for(int i = (int)(components.size()-1);i>=0;i--){
+        for(int i = (int)(components.size()-1);i>=0;i--){ // traversing in reverse Topological Ordering
             for(auto x : components[i]){
                 if(val[conj(x)]!=0){
                     val[x] = -val[conj(x)];

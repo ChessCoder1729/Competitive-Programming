@@ -11,6 +11,6 @@ Use the minimum weight edge to join a node in the connected component to a node 
 During each iteration we find connected components in the graph formed by already added edges, and for each component we find the shortest edge that leads out of this component.
 Number of iterations <= log n
 
-Note :
+Note for Boruvka's Algorithm:
 In case of same weights:
 Instead of just comparing weights, the algorithm compares tuples: (weight, edge_id)

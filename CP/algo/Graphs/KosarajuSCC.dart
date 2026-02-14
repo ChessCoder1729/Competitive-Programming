@@ -31,7 +31,7 @@ struct Kosaraju{
             }
         }
 
-        reverse(all(order));
+        reverse(all(order)); // DON'T FORGET THIS!
 
         vector<int>roots(n,0);
         visited.assign(n,false);
@@ -52,12 +52,12 @@ struct Kosaraju{
         adj_cond.assign(n,{});
         for(int v = 0;v<n;v++){
             for(auto u : adj[v]){
-                if(roots[v]!=roots[u]){ // IMPORTANT 
+                if(roots[v]!=roots[u]){ // IMPORTANT
                     adj_cond[roots[v]].pb(roots[u]);
                 }
             }
         }
     }
 };
-// component stores in topologicial order
+// components stored in topologicial order
 // adj_cond -> directed graph with cycle to DAG

@@ -2,6 +2,8 @@
 // Reference Q : https://codeforces.com/problemset/problem/915/E
 
 /*
+We sort by "r" from low to high
+
 It is ammortized time complexity, because:
 1. In add_range:
     Suppose initially you had k ranges, and you merge t of them, so you are left with (k-t+1) ranges

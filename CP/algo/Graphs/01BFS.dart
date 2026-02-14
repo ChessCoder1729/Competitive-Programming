@@ -4,8 +4,8 @@ vector<int>parent; // If we need to retrace path just backtrack
 
 // If weights = 0,1 [If weights = 1 then just bfs]
 
-vector<ll>bfs_0_1(int src, vector<vector<pair<int,ll>>>&adj){
-    vector<ll>dist(adj.size(),inf); parent.resize(adj.size());
+vector<int>bfs_0_1(int src, vector<vector<pair<int,int>>>&adj){
+    vector<int>dist(adj.size(),inf); parent.resize(adj.size());
     deque <int> q;
     dist[src] = 0;
     q.push_back(src);
