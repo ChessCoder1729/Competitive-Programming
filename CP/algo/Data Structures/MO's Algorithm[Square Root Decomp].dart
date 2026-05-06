@@ -71,13 +71,19 @@ struct Mos {
 
 
         int left = 0, right = -1; current_answer = 0;
-
+        // NOTE : The order in which the add, is done first followed by remove is important
+        
         for (const auto& q : queries) {
 
             while (right < q.r) {
                 right++;
                 add_right(right);
             }
+            while (left > q.l) {
+                left--;
+                add_left(left);
+            }
+
             while (right > q.r) {
                 remove_right(right);
                 right--;
@@ -87,10 +93,7 @@ struct Mos {
                 remove_left(left);
                 left++;
             }
-            while (left > q.l) {
-                left--;
-                add_left(left);
-            }
+
 
             result[q.idx] = ?;
         }

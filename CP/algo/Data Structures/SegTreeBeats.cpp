@@ -1,3 +1,13 @@
+/*
+range_chmin(l, r, x): for each i ∈[l,r),ai←min(ai,x)
+range_chmax(l, r, x): for each i ∈[l,r),ai←max(ai,x)
+range_add(l, r, x): for each i ∈[l,r),ai←ai+x
+range_update(l, r, x): for each i ∈[l,r),ai←x
+range_min(l, r): return min(al...ar)
+range_max(l, r): return max(al..ar)
+range_sum(l, r): return sum(al..ar)
+*/
+
 struct SegmentTreeBeats {
   using i64 = long long;
   static constexpr i64 INF = numeric_limits<i64>::max() / 2.1;
