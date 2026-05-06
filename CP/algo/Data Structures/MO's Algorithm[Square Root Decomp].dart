@@ -30,6 +30,11 @@ struct Query {
     bool operator<(const Query& q) {
         return ord < q.ord;
     }
+    bool operator<(const Query &q) const{
+        if (l / block_size != q.l / block_size)
+            return l / block_size < q.l / block_size;
+        return r < q.r;
+    }
 };
 
 struct Mos {
@@ -47,7 +52,7 @@ struct Mos {
 
     }
     void remove_right(){
-        
+
     }
 
     void init(vector<int>&vec){
